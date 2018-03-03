@@ -8,7 +8,7 @@ namespace ModernEncryption.BusinessLogic.Crypto
 {
     internal class QrCode
     {
-        public SKBitmap Draw(string content, int width, int height) {
+        public SKBitmap Create(string content, int width, int height) {
             return new BarcodeWriter
             {
                 Format = BarcodeFormat.QR_CODE,

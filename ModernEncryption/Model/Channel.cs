@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using FFImageLoading.Forms;
 using ModernEncryption.BusinessLogic.Crypto;
 using ModernEncryption.Interfaces;
 using ModernEncryption.Presentation.View;
-using ModernEncryption.Service;
 using ModernEncryption.Translations;
 using Plugin.SecureStorage;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
-using Xamarin.Forms;
 
 namespace ModernEncryption.Model
 {
