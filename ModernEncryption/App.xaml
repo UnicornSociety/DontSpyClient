@@ -11,10 +11,11 @@
             <Color x:Key="BlackColor">#000000</Color>
             <Color x:Key="WhiteColor">#ffffff</Color>
             <Color x:Key="ErrorColor">#ff5252</Color>
-            
             <Color x:Key="BlueColor">#6495ed</Color>
             <Color x:Key="GrayColor">#bfbfbf</Color>
+            <Color x:Key="DarkGrayColor">#a5a5a5</Color>
             <Color x:Key="YellowColor">#edbc64</Color>
+            <Color x:Key="LightBlueColor">#7bb3ff</Color>
 
             <!-- STYLES -->
             <Style x:Key="ValidationErrorLabelStyle" TargetType="{x:Type Label}">
@@ -28,9 +29,10 @@
             </Style>
 
             <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
+                <Setter Property="TextColor" Value="{StaticResource DarkGrayColor}" />
                 <Setter Property="BorderColor" Value="{StaticResource GrayColor}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="BorderRadius" Value="13" />
                 <Setter Property="FontSize" Value="14" />
             </Style>
 
@@ -42,9 +44,9 @@
             </Style>
 
             <Style x:Key="BlueButtonStyle" TargetType="{x:Type Button}">
-                <Setter Property="TextColor" Value="{StaticResource BlackColor}" />
-                <Setter Property="BorderColor" Value="{StaticResource YellowColor}" />
-                <Setter Property="BackgroundColor" Value="{StaticResource YellowColor}" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="BorderColor" Value="{StaticResource BlueColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource BlueColor}" />
                 <Setter Property="BorderRadius" Value="15" />
                 <Setter Property="FontSize" Value="14" />
             </Style>
@@ -63,6 +65,13 @@
 
             <Style x:Key="TimestampStyle" TargetType="{x:Type Label}"> <!--Timestamp in Channels-->
                 <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="Micro" />
+            </Style>
+
+            <Style x:Key="MemberInChannelStyle" TargetType="{x:Type Label}">
+                <!--Timestamp in Channels-->
+                <Setter Property="TextColor" Value="{StaticResource DarkGrayColor}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
                 <Setter Property="FontSize" Value="Micro" />
             </Style>
