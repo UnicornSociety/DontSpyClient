@@ -3,12 +3,16 @@
              x:Class="ModernEncryption.Presentation.View.KeyPage"
              xmlns:local="clr-namespace:ModernEncryption.Utils;assembly=ModernEncryption"
              xmlns:i18n="clr-namespace:ModernEncryption.Presentation.View;assembly=ModernEncryption"
+             xmlns:views="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              Title="{Binding Title}"
              x:Name="KeyPage">
     <ContentPage.Content>
-        <StackLayout>
+        <Grid>
+            <views:SKCanvasView PaintSurface="OnPainting" />
+        </Grid>
+        <!--<StackLayout>
             <Label Text="{i18n:Translate KeyText}" FontSize="20"></Label>
             <Image Source="{local:ImageResource ModernEncryption.qrcode.png}" HeightRequest ="300" HorizontalOptions="Center"  VerticalOptions="Center" />
-        </StackLayout>
+        </StackLayout>-->
     </ContentPage.Content>
 </ContentPage>
