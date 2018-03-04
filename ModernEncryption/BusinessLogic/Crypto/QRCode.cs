@@ -8,7 +8,7 @@ using SkiaSharp;
 using ZXing;
 using ZXing.QrCode;
 using ZXing.SkiaSharp;
-using BarcodeReader = ZXing.SkiaSharp.BarcodeReader;
+using BarcodeReader = ZXing.BarcodeReader;
 
 namespace ModernEncryption.BusinessLogic.Crypto
 {
@@ -29,11 +29,13 @@ namespace ModernEncryption.BusinessLogic.Crypto
 
         private string Read(SKBitmap qrCodeImage)
         {
-            return new BarcodeReader
+            var decodedQrCodeResult = new BarcodeReader
             {
                 Options = { TryHarder = true },
                 TryInverted = true
-            }.Decode(qrCodeImage).Text;
+            }.Decode(Create("testStringContent",500,500)); // TODO: Replace with picture which is took from camera (qrCodeImage)
+
+            return decodedQrCodeResult?.Text;
         }
 
         public async Task<string> ReadViaCamera()
