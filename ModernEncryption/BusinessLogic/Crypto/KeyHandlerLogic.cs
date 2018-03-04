@@ -4,7 +4,7 @@ using ModernEncryption.Interfaces;
 
 namespace ModernEncryption.BusinessLogic.Crypto
 {
-    internal class KeyHandling : IKeyHandling
+    internal class KeyHandlerLogic : IKeyHandler
     {
 
         public int[] ProduceKeys(int n)
