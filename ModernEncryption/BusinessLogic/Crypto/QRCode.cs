@@ -39,7 +39,7 @@ namespace ModernEncryption.BusinessLogic.Crypto
                 },
                 TryInverted = true,
                 AutoRotate = true
-            }.Decode(Create("testStringContent",500,500)); // TODO: Replace with picture which is took from camera (qrCodeImage)
+            }.Decode(qrCodeImage);
 
             return decodedQrCodeResult?.Text;
         }
