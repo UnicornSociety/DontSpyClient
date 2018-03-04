@@ -26,7 +26,6 @@ namespace ModernEncryption.UWP
         public MainPage()
         {
             this.InitializeComponent();
-            WinSecureStorageBase.StoragePassword = "12345";
             LoadApplication(new ModernEncryption.App());
         }
     }
