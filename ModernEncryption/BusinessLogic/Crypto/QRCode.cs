@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ModernEncryption.Utils;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
@@ -31,8 +32,13 @@ namespace ModernEncryption.BusinessLogic.Crypto
         {
             var decodedQrCodeResult = new BarcodeReader
             {
-                Options = { TryHarder = true },
-                TryInverted = true
+                Options =
+                {
+                    TryHarder = true,
+                    PossibleFormats = new List<BarcodeFormat> {BarcodeFormat.QR_CODE}
+                },
+                TryInverted = true,
+                AutoRotate = true
             }.Decode(Create("testStringContent",500,500)); // TODO: Replace with picture which is took from camera (qrCodeImage)
 
             return decodedQrCodeResult?.Text;
