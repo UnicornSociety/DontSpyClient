@@ -76,5 +76,29 @@ namespace ModernEncryption.BusinessLogic.Crypto
 
             return qrCodeResult;
         }
+
+        public async Task<string> PickFromGallery()
+        {
+            await CrossMedia.Current.Initialize();
+
+            // Permissions
+            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+            if (storageStatus != PermissionStatus.Granted)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Storage);
+                storageStatus = results[Permission.Storage];
+            }
+            if (storageStatus != PermissionStatus.Granted) return null;
+
+            // Access gallery
+            if (!CrossMedia.Current.IsPickPhotoSupported) return null;
+            var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+            {
+                PhotoSize = PhotoSize.Full
+            });
+
+            return Read(SKBitmap.Decode(file.GetStream()));
+        }
     }
 }
