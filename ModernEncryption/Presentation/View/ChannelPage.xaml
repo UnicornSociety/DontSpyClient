@@ -15,13 +15,19 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" BackgroundColor ="Black">
-            <Image Source="{Binding QrCode}" IsVisible="{Binding QrCodeVisibility}" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+        <StackLayout VerticalOptions="FillAndExpand" BackgroundColor ="White">
             <ListView x:Name="listView" ItemsSource="{Binding Messages}">
                 <ListView.Header>
                     <StackLayout HorizontalOptions="FillAndExpand">
 						<Label Text="{i18n:Translate ChannelHeading}" Font="Bold" HorizontalTextAlignment="Center"/>
-						<Button Text="{i18n:Translate Key}" HorizontalOptions="Center" Command ="{Binding ShowKeyCommand}" TextColor="Gray" BorderColor="Gray"  BorderRadius="0" IsVisible="{Binding KeyVisibility}" />
+                        <Button Text="{i18n:Translate Key}" HorizontalOptions="Center" Command ="{Binding ShowKeyCommand}" IsVisible="{Binding KeyVisibility}" >
+                            <Button.Style>
+                                <OnPlatform x:TypeArguments="Style"  
+                                        iOS="{StaticResource ButtonStyle}"  
+                                        Android="{StaticResource ButtonStyle}"  
+                                        WinPhone="{StaticResource ButtonStyle}"/>
+                            </Button.Style>
+                        </Button>
 					</StackLayout>
                 </ListView.Header>
 
@@ -68,15 +74,23 @@
                                         <Label Text="{Binding Text}"  BackgroundColor="#fff" FontSize="Medium" />
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand"  Padding="5">
-                                        <Label Text="{Binding Timestamp, Converter={StaticResource TimestampConverter}}"  FontSize="Micro" TextColor="Gray">
+                                        <Label Text="{Binding Timestamp, Converter={StaticResource TimestampConverter}}"  FontSize="Micro">
                                             <Label.Style>
                                                 <OnPlatform x:TypeArguments="Style"
-                                            iOS="{StaticResource TimestampStyle}"
-                                            Android="{StaticResource TimestampStyle}"
-                                            WinPhone="{StaticResource TimestampStyle}"/>
+                                                    iOS="{StaticResource TimestampStyle}"
+                                                    Android="{StaticResource TimestampStyle}"
+                                                    WinPhone="{StaticResource TimestampStyle}"/>
                                             </Label.Style>
                                         </Label>
-                                        <Label Text="{Binding Sender.Username}" />
+                                        
+                                        <Label Text="{Binding Sender.Username}">
+                                            <Label.Style>
+                                                <OnPlatform x:TypeArguments="Style"
+                                                    iOS="{StaticResource MemberInChannelStyle}"
+                                                    Android="{StaticResource MemberInChannelStyle}"
+                                                    WinPhone="{StaticResource MemberInChannelStyle}"/>
+                                            </Label.Style>
+                                        </Label>
                                     </StackLayout>
                                 </StackLayout>
                             </StackLayout>
