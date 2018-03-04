@@ -42,11 +42,12 @@ namespace ModernEncryption
                 DependencyManager.Me = ownUser;
                 DependencyManager.PullService.PullChannelRequests();
                 DependencyManager.PullService.PullNewMessages();
-                MainPage = DependencyManager.AnchorPage;
+                //MainPage = DependencyManager.AnchorPage;
+                MainPage = new KeyPage();
             }
             else
             {
-                MainPage = new RegistrationPage(); //eig: RegistrationPage
+                MainPage = new RegistrationPage();
             }
         }
 
