@@ -57,6 +57,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Plugin.Permissions" Version="2.2.1" />
     <PackageReference Include="sameerIOTApps.Plugin.SecureStorage" Version="1.2.2" />
     <PackageReference Include="SkiaSharp" Version="1.60.0" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.59.0" />
