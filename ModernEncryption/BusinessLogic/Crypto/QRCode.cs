@@ -1,14 +1,11 @@
-﻿using System.Threading.Tasks;
-using ModernEncryption.Utils;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Plugin.Media;
-using Plugin.Media.Abstractions;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
 using SkiaSharp;
 using ZXing;
+using ZXing.Common;
 using ZXing.QrCode;
 using ZXing.SkiaSharp;
-using BarcodeReader = ZXing.SkiaSharp.BarcodeReader;
 
 namespace ModernEncryption.BusinessLogic.Crypto
 {
@@ -26,46 +23,18 @@ namespace ModernEncryption.BusinessLogic.Crypto
             }.Write(content);
         }
 
-        private string Read(SKBitmap qrCodeImage)
-        {
-            return new BarcodeReader
-            {
-                Options = { TryHarder = true },
-                TryInverted = true
-            }.Decode(qrCodeImage).Text;
-        }
-
-        public async Task<string> ReadViaCamera()
+        public async Task<Stream> ReadViaCamera(long channelId)
         {
             await CrossMedia.Current.Initialize();
-            if (!CrossMedia.Current.IsCameraAvailable) return null; // Is camera available?
-
-            // Permissions
-            var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-            var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
-
-            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported) return null;
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             {
-                var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera, Permission.Storage);
-                cameraStatus = results[Permission.Camera];
-                storageStatus = results[Permission.Storage];
-            }
-            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted) return null;
-
-            // Access camera
-            if (!CrossMedia.Current.IsTakePhotoSupported) return null;
-            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
-            {
-                DefaultCamera = CameraDevice.Front,
-                SaveToAlbum = false,
+                DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Front,
                 Directory = "TemporaryKeys",
-                Name = TimeManagement.UnixTimestampNow + ".jpg"
+                Name = channelId + ".jpg"
             });
-
-            var qrCodeResult = Read(SKBitmap.Decode(file.GetStream()));
-            System.IO.File.Delete(file.Path); // Delete temporary QR-Code
-
-            return qrCodeResult;
+            
+            return file?.GetStream();
         }
     }
 }
