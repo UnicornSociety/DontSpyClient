@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using Windows.Storage;
 using ModernEncryption.Model;
 using ModernEncryption.UWP;
@@ -8,10 +7,10 @@ using SQLite.Net;
 using SQLite.Net.Async;
 using SQLite.Net.Platform.WinRT;
 
-[assembly: Xamarin.Forms.Dependency(typeof(LocalDatabaseUwp))]
+[assembly: Xamarin.Forms.Dependency(typeof(LocalStorageUwp))]
 namespace ModernEncryption.UWP
 {
-    public class LocalDatabaseUwp : Interfaces.IStorage
+    public class LocalStorageUwp : Interfaces.IStorage
     {
         private SQLiteConnectionWithLock _conn;
 
