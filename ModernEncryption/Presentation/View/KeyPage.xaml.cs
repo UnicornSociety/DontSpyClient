@@ -30,7 +30,7 @@ namespace ModernEncryption.Presentation.View
 
 	    private async void OnPainting(object sender, SKPaintSurfaceEventArgs e)
 	    {
-	        var x = new QrCode().Create("Lore242424m ipsum dolor sit amet, consectetuer adipiscing elit. Ae1nean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapib1", 500, 500, 500);
+	        var x = new QrCodeLogic().Create("Lore242424m ipsum dolor sit amet, consectetuer adipiscing elit. Ae1nean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapib1", 500, 500, 500);
 
 	        e.Surface.Canvas.DrawBitmap(x[0], 0, 0);
 	        e.Surface.Canvas.DrawBitmap(x[1], 500, 0);
@@ -40,8 +40,8 @@ namespace ModernEncryption.Presentation.View
 	        DependencyService.Get<IStorage>().SaveImage("test.png", data.ToArray());
 
 
-	        //var x = await new QrCode().ReadViaCamera();
-	        //var x = await new QrCode().PickFromGallery();
+	        //var x = await new QrCodeLogic().ReadViaCamera();
+	        //var x = await new QrCodeLogic().PickFromGallery();
 	        //System.Diagnostics.Debug.WriteLine(x);
 	    }
     }

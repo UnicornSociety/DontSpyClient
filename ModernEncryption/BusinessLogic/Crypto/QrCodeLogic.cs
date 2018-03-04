@@ -14,7 +14,7 @@ using BarcodeReader = ZXing.BarcodeReader;
 
 namespace ModernEncryption.BusinessLogic.Crypto
 {
-    internal class QrCode
+    internal class QrCodeLogic
     {
         public List<SKBitmap> Create(string content, int signsPerQrCode, int width, int height)
         {
