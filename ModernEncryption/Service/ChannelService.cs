@@ -55,16 +55,19 @@ namespace ModernEncryption.Service
         public List<DecryptedMessage> LoadDecryptedMessagesForChannel(Channel channel)
         {
             return channel.Messages.Select(encryptedMessage =>
-            new DecryptionLogic(encryptedMessage, channel.KeyTable)).Select(decryption =>
+            //new DecryptionLogic(encryptedMessage, channel.KeyTable)).Select(decryption =>
+            new DecryptionLogic(encryptedMessage)).Select(decryption =>
             ((IDecrypt)decryption).Decrypt()).ToList().OrderBy(encryptedMessage =>
             encryptedMessage.Timestamp).ToList();
         }
 
         public bool SendMessage(string message, Channel channel)
         {
-            IEncrypt encryption = new EncryptionLogic(new Message(DependencyManager.Me.Id, message), channel.KeyTable);
+            //IEncrypt encryption = new EncryptionLogic(new Message(DependencyManager.Me.Id, message), channel.KeyTable);
+            IEncrypt encryption = new EncryptionLogic(new Message(DependencyManager.Me.Id, message));
             var preparedMessage = encryption.Encrypt();
-            IDecrypt decryption = new DecryptionLogic(preparedMessage, channel.KeyTable);
+            //IDecrypt decryption = new DecryptionLogic(preparedMessage, channel.KeyTable);
+            IDecrypt decryption = new DecryptionLogic(preparedMessage);
             channel.View.ViewModel.Messages.Add(decryption.Decrypt());
             channel.Messages.Add(preparedMessage);
             DependencyManager.Database.InsertWithChildren(preparedMessage);
