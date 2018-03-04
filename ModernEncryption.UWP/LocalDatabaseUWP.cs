@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Windows.Storage;
 using ModernEncryption.Model;
 using ModernEncryption.UWP;
@@ -62,6 +63,13 @@ namespace ModernEncryption.UWP
             // Must be called as the disposal of the connection is not released until the GC runs.
             GC.Collect();
             GC.WaitForPendingFinalizers();
+        }
+
+        public async void SaveImage(string filename, byte[] stream)
+        {
+            var localFolder = ApplicationData.Current.LocalFolder;
+            var file = await localFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteBytesAsync(file, stream);
         }
     }
 }

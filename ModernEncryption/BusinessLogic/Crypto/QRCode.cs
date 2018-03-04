@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ModernEncryption.Utils;
 using Plugin.Media;
@@ -15,22 +16,35 @@ namespace ModernEncryption.BusinessLogic.Crypto
 {
     internal class QrCode
     {
-        public SKBitmap Create(string content, int width, int height)
+        public List<SKBitmap> Create(string content, int signsPerQrCode, int width, int height)
         {
-            return new BarcodeWriter
+            var qrCodes = new List<SKBitmap>();
+
+            var sumQrCodes = content.Length / signsPerQrCode;
+            if (content.Length % signsPerQrCode > 0) sumQrCodes++;
+            var sumQrCodesCounter = 1;
+
+            for (var i = 0; i < content.Length; i += signsPerQrCode)
             {
-                Format = BarcodeFormat.QR_CODE,
-                Options = new QrCodeEncodingOptions
+                qrCodes.Add(new BarcodeWriter
                 {
-                    Width = width,
-                    Height = height
-                }
-            }.Write(content);
+                    Format = BarcodeFormat.QR_CODE,
+                    Options = new QrCodeEncodingOptions
+                    {
+                        Width = width,
+                        Height = height
+                    }
+                }.Write(sumQrCodesCounter++ + ";" + sumQrCodes + "#" + content.Substring(i, Math.Min(signsPerQrCode, content.Length - i))));
+            }
+
+            return qrCodes;
         }
 
         private string Read(SKBitmap qrCodeImage)
         {
-            var decodedQrCodeResult = new BarcodeReader
+            var qrCodes = new Dictionary<int, string>();
+
+            var decodedQrCodeResults = new BarcodeReader
             {
                 Options =
                 {
@@ -39,9 +53,34 @@ namespace ModernEncryption.BusinessLogic.Crypto
                 },
                 TryInverted = true,
                 AutoRotate = true
-            }.Decode(qrCodeImage);
+            }.DecodeMultiple(qrCodeImage);
 
-            return decodedQrCodeResult?.Text;
+            if (decodedQrCodeResults == null) return null;
+
+            string qrCodesIntegrity = null;
+            foreach (var decodedQrCodeResult in decodedQrCodeResults)
+            {
+                var qrCodeDataSplit = decodedQrCodeResult.Text.Split(new[] { '#' }, 2);
+                var qrCodeOrderingNumbers = qrCodeDataSplit[0].Split(new[] { ';' }, 2);
+
+                // Check integrity of the qr codes sum
+                if (qrCodesIntegrity == null) qrCodesIntegrity = qrCodeOrderingNumbers[1];
+                else if (qrCodesIntegrity != qrCodeOrderingNumbers[1]) return null;
+                if (qrCodes.ContainsKey(int.Parse(qrCodeOrderingNumbers[0]))) return null; // Injured integrity
+
+                qrCodes.Add(int.Parse(qrCodeOrderingNumbers[0]), qrCodeDataSplit[1]);
+            }
+            
+            if (qrCodes.Count != int.Parse(qrCodesIntegrity)) return null; // Injured integrity
+            
+            var key = string.Empty;
+            for (var i = 1; i <= qrCodes.Count; i++)
+            {
+                if (!qrCodes.ContainsKey(i)) return null; // Injured integrity
+                key += qrCodes[i];
+            }
+
+            return key;
         }
 
         public async Task<string> ReadViaCamera()
