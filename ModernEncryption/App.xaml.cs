@@ -34,10 +34,10 @@ namespace ModernEncryption
             MathematicalMappingLogic.BackTransformationTable =
             MathematicalMappingLogic.TransformationTable.ToDictionary(x => x.Value, x => x.Key);
 
-            if (CrossSecureStorage.Current.HasKey("OwnUser"))
+            if (DependencyService.Get<IStorage>().CheckValueFromKeyExists("OwnUser"))
             {
                 var ownUser = DependencyManager.Database.GetWithChildren<User>(
-                    CrossSecureStorage.Current.GetValue("OwnUser"));
+                    DependencyService.Get<IStorage>().GetValueFromKey("OwnUser"));
 
                 DependencyManager.Me = ownUser;
                 DependencyManager.PullService.PullChannelRequests();

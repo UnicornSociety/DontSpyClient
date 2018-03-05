@@ -44,7 +44,7 @@ namespace ModernEncryption.Model
             get
             {
                 if (_keyTable != null) return _keyTable;
-                var key = CrossSecureStorage.Current.GetValue(Id);
+                var key = DependencyService.Get<IStorage>().GetValueFromKey(Id);
                 int[] _key = key.Split(';').Select(int.Parse).ToArray();
                 //int[] _key = key.Split(';').Select(n => Convert.ToInt32(n)).ToArray();
                 _keyTable = _keyHandler.KeyTable(_key);
@@ -69,7 +69,7 @@ namespace ModernEncryption.Model
                 empty = _key;
             }
             empty = empty + key[key.Length-1];
-            CrossSecureStorage.Current.SetValue(id, empty);
+            DependencyService.Get<IStorage>().SetValueWithKey(id, empty);
             Id = id;
             Members = members;
             

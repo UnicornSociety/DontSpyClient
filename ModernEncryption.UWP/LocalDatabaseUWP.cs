@@ -10,7 +10,7 @@ using SQLite.Net.Platform.WinRT;
 [assembly: Xamarin.Forms.Dependency(typeof(LocalDatabaseUwp))]
 namespace ModernEncryption.UWP
 {
-    public class LocalDatabaseUwp : Interfaces.IStorage
+    public class LocalDatabaseUwp : Service.StorageService, Interfaces.IStorage
     {
         private SQLiteConnectionWithLock _conn;
 

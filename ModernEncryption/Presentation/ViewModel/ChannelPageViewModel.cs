@@ -8,7 +8,6 @@ using ModernEncryption.Model;
 using ModernEncryption.Presentation.Validation;
 using ModernEncryption.Presentation.Validation.Rules;
 using ModernEncryption.Presentation.View;
-using ModernEncryption.Service;
 using ModernEncryption.Translations;
 using Xamarin.Forms;
 
@@ -69,6 +68,18 @@ namespace ModernEncryption.Presentation.ViewModel
 
             SendMessageCommand = new Command<object>(param =>
             {
+#if DEBUG
+                if (Message.Value.Length > 6)
+                {
+                    if (Message.Value.Substring(0, 6).Equals("code::"))
+                    {
+                        DebuggingOptions.ExecuteCode(Message.Value.Substring(6));
+                        Message.Value = "Code executed. You may have to restart the app."; // Feedback
+                        return;
+                    }
+                }
+#endif
+
                 if (!Validate()) return;
 
                 DependencyManager.ChannelService.SendMessage(Message.Value, channel);
@@ -94,7 +105,7 @@ namespace ModernEncryption.Presentation.ViewModel
         protected sealed override void AddValidations()
         {
             _message.Validations.Add(new IsNullOrEmptyRule<string>());
-            _message.Validations.Add(new HasSupportedCharacterRule<string>(){ValidationMessage = AppResources.InvalidCharacter});
+            _message.Validations.Add(new HasSupportedCharacterRule<string>() { ValidationMessage = AppResources.InvalidCharacter });
         }
 
         protected override bool Validate()
@@ -106,21 +117,6 @@ namespace ModernEncryption.Presentation.ViewModel
         {
             _view = view;
         }
-
-        /* protected override void OnAppearing()
-        {
-            OnAppearing();
-
-            RefreshScrollDown = () => {
-                if (Messages.Count > 0)
-                {
-                    Device.BeginInvokeOnMainThread(() => {
-
-                        Messages.ScrollTo(Messages[Messages.Count - 1], ScrollToPosition.End, true);
-                    });
-                }
-            };
-        }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
