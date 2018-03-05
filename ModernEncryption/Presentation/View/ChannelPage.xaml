@@ -23,7 +23,7 @@
 			Source = "{Binding QrCode}">
             </ffimageloading:CachedImage>
             <Image Source="{Binding QrCode}" IsVisible="{Binding QrCodeVisibility}" HorizontalOptions="Center" VerticalOptions="Center"></Image>
-            <ListView x:Name="listView" ItemsSource="{Binding Messages}">
+            <ListView x:Name="MessagesListView" ItemsSource="{Binding Messages}">
                 <ListView.Header>
                     <StackLayout HorizontalOptions="FillAndExpand">
 						<Label Text="{i18n:Translate ChannelHeading}" Font="Bold" HorizontalTextAlignment="Center"/>

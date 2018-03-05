@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
-using FFImageLoading.Forms;
-using ModernEncryption.Interfaces;
 using ModernEncryption.Model;
 using ModernEncryption.Presentation.Validation;
 using ModernEncryption.Presentation.Validation.Rules;
 using ModernEncryption.Presentation.View;
-using ModernEncryption.Service;
 using ModernEncryption.Translations;
 using Xamarin.Forms;
 
@@ -73,6 +70,8 @@ namespace ModernEncryption.Presentation.ViewModel
 
                 DependencyManager.ChannelService.SendMessage(Message.Value, channel);
                 Message.Value = string.Empty; // Clear field
+
+                _view.GetMessagesListView.ScrollTo(Messages.LastOrDefault(), ScrollToPosition.End, true); // Scroll to ListView bottom
             });
 
             ValidateMessageCommand = new Command<object>(param =>
@@ -91,6 +90,11 @@ namespace ModernEncryption.Presentation.ViewModel
             });
         }
 
+        public void PostConstruct()
+        {
+            _view.GetMessagesListView.ScrollTo(Messages.LastOrDefault(), ScrollToPosition.End, true); // Scroll to ListView bottom
+        }
+
         protected sealed override void AddValidations()
         {
             _message.Validations.Add(new IsNullOrEmptyRule<string>());
@@ -106,21 +110,6 @@ namespace ModernEncryption.Presentation.ViewModel
         {
             _view = view;
         }
-
-        /* protected override void OnAppearing()
-        {
-            OnAppearing();
-
-            RefreshScrollDown = () => {
-                if (Messages.Count > 0)
-                {
-                    Device.BeginInvokeOnMainThread(() => {
-
-                        Messages.ScrollTo(Messages[Messages.Count - 1], ScrollToPosition.End, true);
-                    });
-                }
-            };
-        }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
