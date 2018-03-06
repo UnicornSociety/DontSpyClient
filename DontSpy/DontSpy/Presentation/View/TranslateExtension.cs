@@ -13,7 +13,7 @@ namespace DontSpy.Presentation.View
     public class TranslateExtension : IMarkupExtension
     {
         readonly CultureInfo ci;
-        const string ResourceId = "ModernEncryption.Translations.AppResources";
+        const string ResourceId = "DontSpy.Translations.AppResources";
 
         private static readonly Lazy<ResourceManager> ResMgr = new Lazy<ResourceManager>(() => new ResourceManager(ResourceId
             , typeof(TranslateExtension).GetTypeInfo().Assembly));

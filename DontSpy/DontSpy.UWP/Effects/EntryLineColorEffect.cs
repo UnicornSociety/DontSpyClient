@@ -7,12 +7,12 @@ using Media = Windows.UI.Xaml.Media;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
 using Windows.UI.Xaml.Controls;
-using ModernEncryption.Presentation.Behaviors;
-using ModernEncryption.UWP.Effects;
+using DontSpy.Presentation.Behaviors;
+using DontSpy.UWP.Effects;
 
-[assembly: ResolutionGroupName("ModernEncryption")]
+[assembly: ResolutionGroupName("DontSpy")]
 [assembly: ExportEffect(typeof(EntryLineColorEffect), "EntryLineColorEffect")]
-namespace ModernEncryption.UWP.Effects
+namespace DontSpy.UWP.Effects
 {
     public class EntryLineColorEffect : PlatformEffect
     {

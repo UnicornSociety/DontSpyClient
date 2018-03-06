@@ -1,22 +1,21 @@
 ﻿using System;
 using System.IO;
 using Windows.Storage;
-using ModernEncryption.Model;
-using ModernEncryption.UWP;
+using DontSpy.UWP;
 using SQLite.Net;
 using SQLite.Net.Async;
 using SQLite.Net.Platform.WinRT;
 
 [assembly: Xamarin.Forms.Dependency(typeof(LocalDatabaseUwp))]
-namespace ModernEncryption.UWP
+namespace DontSpy.UWP
 {
-    public class LocalDatabaseUwp : Interfaces.IStorage
+    public class LocalDatabaseUwp : DontSpy.Interfaces.IStorage
     {
         private SQLiteConnectionWithLock _conn;
 
         private static string GetDatabasePath()
         {
-            return Path.Combine(ApplicationData.Current.LocalFolder.Path, Constants.LocalDatabaseName);
+            return Path.Combine(ApplicationData.Current.LocalFolder.Path, DontSpy.Constants.LocalDatabaseName);
         }
 
         public SQLiteConnection GetConnection()

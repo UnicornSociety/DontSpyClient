@@ -55,7 +55,7 @@
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
                                 <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="Start" BackgroundColor="#fff">
-                                    <Image Source="{local:ImageResource ModernEncryption.avatar.png}" Aspect=" AspectFit" HeightRequest ="50" VerticalOptions="CenterAndExpand" />
+                                    <Image Source="{local:ImageResource DontSpy.avatar.png}" Aspect=" AspectFit" HeightRequest ="50" VerticalOptions="CenterAndExpand" />
                                 </StackLayout>
                                 <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="FillAndExpand" BackgroundColor="#fff" Padding="11">
                                     <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">

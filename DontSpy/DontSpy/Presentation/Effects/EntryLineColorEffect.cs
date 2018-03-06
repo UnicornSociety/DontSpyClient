@@ -4,7 +4,7 @@ namespace DontSpy.Presentation.Effects
 {
     public class EntryLineColorEffect : RoutingEffect
     {
-        public EntryLineColorEffect() : base("ModernEncryption.EntryLineColorEffect")
+        public EntryLineColorEffect() : base("DontSpy.EntryLineColorEffect")
         {
         }
     }
