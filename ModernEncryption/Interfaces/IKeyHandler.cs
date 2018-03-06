@@ -2,7 +2,7 @@
 
 namespace ModernEncryption.Interfaces
 {
-    public interface IKeyHandling
+    public interface IKeyHandler
     {
         int[] ProduceKeys(int n);
         Dictionary<int, int> KeyTable(int[] key);

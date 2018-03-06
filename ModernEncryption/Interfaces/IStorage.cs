@@ -14,5 +14,6 @@ namespace ModernEncryption.Interfaces
         bool DeleteValueFromKey(string key);
         bool CheckValueFromKeyExists(string key);
         bool ClearKeyValueStorage();
+        void SaveImage(string filename, byte[] stream);
     }
 }
