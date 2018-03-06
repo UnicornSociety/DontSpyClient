@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using ModernEncryption.BusinessLogic.Crypto;
 using ModernEncryption.Interfaces;
@@ -26,8 +27,8 @@ namespace ModernEncryption.Service
                     foreach (var message in RestService.GetMessageBy(channel.Id).Result)
                     {
                         if (channel.Messages.Exists(item => item.Id == message.Id)) continue; // If message exists
-                        //IDecrypt decryption = new DecryptionLogic(message, channel.KeyTable);
-                        IDecrypt decryption = new DecryptionLogic(message);
+                        IDecrypt decryption = new DecryptionLogic(message, channel.KeyTable);
+                        //IDecrypt decryption = new DecryptionLogic(message);
                         channel.View.ViewModel.Messages.Add(decryption.Decrypt());
                         channel.Messages.Add(message);
                         DependencyManager.Database.InsertWithChildren(message);

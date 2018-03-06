@@ -9,14 +9,14 @@ namespace ModernEncryption.BusinessLogic.Crypto
     {
         private readonly char[] _messageTextSymbols;
         private readonly Message _message;
-        //private readonly Dictionary<int, int> _keyTable;
+        private readonly Dictionary<int, int> _keyTable;
 
-        //public EncryptionLogic(Message message, Dictionary<int, int> keyTable)
-        public EncryptionLogic(Message message)
+        public EncryptionLogic(Message message, Dictionary<int, int> keyTable)
+        //public EncryptionLogic(Message message)
         {
             _message = message;
             _messageTextSymbols = message.Text.ToCharArray();
-            //_keyTable = keyTable;
+            _keyTable = keyTable;
         }
 
         public Message Encrypt()
@@ -26,8 +26,8 @@ namespace ModernEncryption.BusinessLogic.Crypto
             foreach (var symbol in _messageTextSymbols)
             {
                 var chipher = CreateChipher(symbol);
-                //var permutedChipher = RunPermutationFor(chipher-1);//KeyTable geht von 0 bis 8099, deshlab -1 weil cipher von 1 bis 8100 ist
-                var permutedChipher = RunPermutationFor(chipher);
+                var permutedChipher = RunPermutationFor(chipher-1);//KeyTable geht von 0 bis 8099, deshlab -1 weil cipher von 1 bis 8100 ist
+                //var permutedChipher = RunPermutationFor(chipher);
 
                 concatenatedEncryptedSymbols += CreateCharacterPair(permutedChipher);
             }
@@ -44,13 +44,13 @@ namespace ModernEncryption.BusinessLogic.Crypto
         }
 
         private int RunPermutationFor(int chipher)
-        {/*
+        {
             if (_keyTable.ContainsKey(chipher))
                 return _keyTable[chipher];
-            return chipher;*/
+            return chipher;/*
             if (MathematicalMappingLogic.KeyTable.ContainsKey(chipher))
                 return MathematicalMappingLogic.KeyTable[chipher];
-            return chipher;
+            return chipher;*/
         }
 
         private string CreateCharacterPair(int permutedChipher)
