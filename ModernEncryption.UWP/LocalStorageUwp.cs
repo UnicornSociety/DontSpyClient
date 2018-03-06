@@ -7,10 +7,10 @@ using SQLite.Net;
 using SQLite.Net.Async;
 using SQLite.Net.Platform.WinRT;
 
-[assembly: Xamarin.Forms.Dependency(typeof(LocalDatabaseUwp))]
+[assembly: Xamarin.Forms.Dependency(typeof(LocalStorageUwp))]
 namespace ModernEncryption.UWP
 {
-    public class LocalDatabaseUwp : Interfaces.IStorage
+    public class LocalStorageUwp : Interfaces.IStorage
     {
         private SQLiteConnectionWithLock _conn;
 
@@ -62,6 +62,13 @@ namespace ModernEncryption.UWP
             // Must be called as the disposal of the connection is not released until the GC runs.
             GC.Collect();
             GC.WaitForPendingFinalizers();
+        }
+
+        public async void SaveImage(string filename, byte[] stream)
+        {
+            var localFolder = ApplicationData.Current.LocalFolder;
+            var file = await localFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteBytesAsync(file, stream);
         }
     }
 }

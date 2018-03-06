@@ -46,7 +46,7 @@ namespace ModernEncryption
             }
             else
             {
-                MainPage = new RegistrationPage(); //eig: RegistrationPage
+                MainPage = new RegistrationPage();
             }
         }
 

@@ -9,5 +9,6 @@ namespace ModernEncryption.Interfaces
         SQLiteConnection GetConnection();
         SQLiteAsyncConnection GetAsyncConnection();
         void DeleteDatabase();
+        void SaveImage(string filename, byte[] stream);
     }
 }

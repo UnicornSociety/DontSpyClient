@@ -66,7 +66,7 @@ namespace ModernEncryption.Service
                         if (member == null) continue;
                         members.Add(member);
                     }
-                    var channel = new Channel(newChannelIdentifier, members);
+                    var channel = new Channel(newChannelIdentifier, members, null, false);
                     channel.Messages.Add(new Message(sender, message.Text) { Timestamp = message.Timestamp });
                     DependencyManager.ChannelsPage.ViewModel.Channels.Add(channel);
                     DependencyManager.Database.InsertOrReplaceWithChildren(channel);
