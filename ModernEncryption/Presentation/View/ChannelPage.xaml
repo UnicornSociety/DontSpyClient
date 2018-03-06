@@ -5,7 +5,6 @@
              xmlns:converter="clr-namespace:ModernEncryption.Presentation.Converter"
              xmlns:i18n="clr-namespace:ModernEncryption.Presentation.View;assembly=ModernEncryption"
              xmlns:behavior="clr-namespace:ModernEncryption.Presentation.Behaviors"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
@@ -17,15 +16,15 @@
 
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" BackgroundColor ="White">
-            <ListView x:Name="listView" ItemsSource="{Binding Messages}">
+            <ListView x:Name="MessagesListView" ItemsSource="{Binding Messages}">
                 <ListView.Header>
                     <StackLayout HorizontalOptions="FillAndExpand">
 						<Label Text="{i18n:Translate ChannelHeading}" Font="Bold" HorizontalTextAlignment="Center"/>
                         <Button Text="{i18n:Translate Key}" HorizontalOptions="Center" Command ="{Binding ShowKeyCommand}" IsVisible="{Binding KeyVisibility}" >
                             <Button.Style>
-                                <OnPlatform x:TypeArguments="Style"  
+                                <OnPlatform x:TypeArguments="Style"
                                         iOS="{StaticResource ButtonStyle}"  
-                                        Android="{StaticResource ButtonStyle}"  
+                                        Android="{StaticResource ButtonStyle}"
                                         WinPhone="{StaticResource ButtonStyle}"/>
                             </Button.Style>
                         </Button>
@@ -83,7 +82,7 @@
                                                     WinPhone="{StaticResource TimestampStyle}"/>
                                             </Label.Style>
                                         </Label>
-                                        
+
                                         <Label Text="{Binding Sender.Username}">
                                             <Label.Style>
                                                 <OnPlatform x:TypeArguments="Style"

@@ -15,8 +15,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using FFImageLoading.Forms;
-using FFImageLoading.Forms.WinUWP;
 
 namespace ModernEncryption.UWP
 {
@@ -54,8 +52,7 @@ namespace ModernEncryption.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 var assembliesToInclude = new List<Assembly>
                 {
-                        typeof(CachedImage).GetTypeInfo().Assembly,
-                        typeof(CachedImageRenderer).GetTypeInfo().Assembly
+                        
                 };
                 Xamarin.Forms.Forms.Init(e, assembliesToInclude);
 
