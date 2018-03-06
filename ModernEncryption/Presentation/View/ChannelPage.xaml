@@ -16,7 +16,7 @@
 
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" BackgroundColor ="White">
-            <ListView x:Name="listView" ItemsSource="{Binding Messages}">
+            <ListView x:Name="MessagesListView" ItemsSource="{Binding Messages}">
                 <ListView.Header>
                     <StackLayout HorizontalOptions="FillAndExpand">
 						<Label Text="{i18n:Translate ChannelHeading}" Font="Bold" HorizontalTextAlignment="Center"/>

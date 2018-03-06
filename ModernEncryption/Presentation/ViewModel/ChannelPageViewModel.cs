@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using ModernEncryption.Model;
 using ModernEncryption.Presentation.Validation;
@@ -81,6 +82,8 @@ namespace ModernEncryption.Presentation.ViewModel
 
                 DependencyManager.ChannelService.SendMessage(Message.Value, channel);
                 Message.Value = string.Empty; // Clear field
+
+                _view.GetMessagesListView.ScrollTo(Messages.LastOrDefault(), ScrollToPosition.End, true); // Scroll to ListView bottom
             });
 
             ValidateMessageCommand = new Command<object>(param =>
@@ -97,6 +100,11 @@ namespace ModernEncryption.Presentation.ViewModel
                 KeyVisibility = false;
                 channel.ChannelKeyVisibility = false;
             });
+        }
+
+        public void PostConstruct()
+        {
+            _view.GetMessagesListView.ScrollTo(Messages.LastOrDefault(), ScrollToPosition.End, true); // Scroll to ListView bottom
         }
 
         protected sealed override void AddValidations()
