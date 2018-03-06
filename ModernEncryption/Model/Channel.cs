@@ -35,12 +35,12 @@ namespace ModernEncryption.Model
 
         [Ignore]
         public Dictionary<int, int> KeyTable
-        { 
+        {
             get
             {
                 if (_keyTable != null) return _keyTable;
-                var key = CrossSecureStorage.Current.GetValue(Id);
-                var _key = key.Split(';').Select(int.Parse).ToArray();
+                var key = DependencyService.Get<IStorage>().GetValueFromKey(Id);
+                int[] _key = key.Split(';').Select(int.Parse).ToArray();
                 //int[] _key = key.Split(';').Select(n => Convert.ToInt32(n)).ToArray();
                 _keyTable = _keyHandler.KeyTable(_key);
                 return _keyTable;
@@ -70,10 +70,11 @@ namespace ModernEncryption.Model
             {
                 // TODO: Waiting for key (QR Code)
             }
-
+            empty = empty + key[key.Length-1];
+            DependencyService.Get<IStorage>().SetValueWithKey(id, empty);
             Id = id;
             Members = members;
-            
+
 
             if (name == null)
             {
