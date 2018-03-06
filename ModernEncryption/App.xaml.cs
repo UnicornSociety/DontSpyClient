@@ -42,8 +42,7 @@ namespace ModernEncryption
                 DependencyManager.Me = ownUser;
                 DependencyManager.PullService.PullChannelRequests();
                 DependencyManager.PullService.PullNewMessages();
-                //MainPage = DependencyManager.AnchorPage;
-                MainPage = new KeyPage();
+                MainPage = DependencyManager.AnchorPage;
             }
             else
             {
