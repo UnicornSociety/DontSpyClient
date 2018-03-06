@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ModernEncryption.Interfaces;
 using ModernEncryption.Model;
 
@@ -26,8 +27,8 @@ namespace ModernEncryption.BusinessLogic.Crypto
             foreach (var symbol in _messageTextSymbols)
             {
                 var chipher = CreateChipher(symbol);
-                //var permutedChipher = RunPermutationFor(chipher-1);//KeyTable geht von 0 bis 8099, deshlab -1 weil cipher von 1 bis 8100 ist
-                var permutedChipher = RunPermutationFor(chipher);
+                var permutedChipher = RunPermutationFor(chipher-1);//KeyTable geht von 0 bis 8099, deshlab -1 weil cipher von 1 bis 8100 ist
+                //var permutedChipher = RunPermutationFor(chipher);
 
                 concatenatedEncryptedSymbols += CreateCharacterPair(permutedChipher);
             }
@@ -44,13 +45,18 @@ namespace ModernEncryption.BusinessLogic.Crypto
         }
 
         private int RunPermutationFor(int chipher)
-        {/*
+        {
+            string key = MathematicalMappingLogic.key;
+            int[] _key = key.Split(';').Select(int.Parse).ToArray();
+            KeyHandling test = new KeyHandling();
+            Dictionary<int, int> _keyTable = test.KeyTable(_key);
             if (_keyTable.ContainsKey(chipher))
                 return _keyTable[chipher];
-            return chipher;*/
-            if (MathematicalMappingLogic.KeyTable.ContainsKey(chipher))
-                return MathematicalMappingLogic.KeyTable[chipher];
             return chipher;
+           /* if (MathematicalMappingLogic.KeyTable.ContainsKey(chipher))
+                return MathematicalMappingLogic.KeyTable[chipher];
+            return chipher;*/
+
         }
 
         private string CreateCharacterPair(int permutedChipher)
