@@ -2,12 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DontSpy.Presentation.View.ContactsPage"
+             xmlns:local="clr-namespace:DontSpy.Utils;assembly=DontSpy"
+             xmlns:i18n="clr-namespace:DontSpy.Presentation.View;assembly=DontSpy"
              xmlns:converter="clr-namespace:DontSpy.Presentation.Converter;assembly=DontSpy"
              xmlns:behaviors="clr-namespace:DontSpy.Presentation.Behaviors;assembly=DontSpy"
-             xmlns:local="clr-namespace:DontSpy.Presentation.View;assembly=DontSpy"
              Title="{Binding Title}"
              x:Name="contactsPage">
-<!--
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:ItemTappedEventArgsToItemTappedConverter x:Key="ItemTappedConverter" />
@@ -23,7 +24,7 @@
 
                 <ListView.Header>
                     <StackLayout Padding="5">
-                        <Entry Text="{Binding Username.Value, Mode=TwoWay}" Placeholder="{local:Translate Username}" HorizontalTextAlignment="Center" FontSize="20">
+                        <Entry Text="{Binding Username.Value, Mode=TwoWay}" Placeholder="{i18n:Translate Username}" HorizontalTextAlignment="Center" FontSize="20">
                             <Entry.Style>
                                 <OnPlatform x:TypeArguments="Style"
                                             iOS="{StaticResource EntryStyle}"
@@ -35,7 +36,7 @@
                             </Entry.Behaviors>
                             <Entry.Triggers>
                                 <DataTrigger TargetType="Entry" Binding="{Binding Username.IsValid}" Value="False">
-                                    <Setter Property="behavior:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
                                 </DataTrigger>
                             </Entry.Triggers>
                         </Entry>
@@ -71,6 +72,6 @@
             </ListView>
             <Button Text="{i18n:Translate CreateGroup}" FontSize="20" TextColor="White" BackgroundColor="CornflowerBlue" BorderRadius="10"  IsVisible="{Binding BindingContext.MultipleSelectionVisibility,Source={x:Reference contactsPage}}" Command="{Binding ClickedCreateGroupCommand}" />
         </StackLayout>
-    </ContentPage.Content>-->
+    </ContentPage.Content>
 
 </ContentPage>

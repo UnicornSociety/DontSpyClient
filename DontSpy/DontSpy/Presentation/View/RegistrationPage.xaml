@@ -7,7 +7,7 @@
              xmlns:converter="clr-namespace:DontSpy.Presentation.Converter;assembly=DontSpy"
              xmlns:behaviors="clr-namespace:DontSpy.Presentation.Behaviors;assembly=DontSpy"
              Title="{Binding Title}">
-<!--
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
@@ -30,7 +30,7 @@
                                         WinPhone="{StaticResource LabelStyle}"/>
                         </Label.Style>
                     </Label>
-                    <Entry Text="{Binding Username.Value, Mode=TwoWay}" Placeholder="{i18n:Translate Username}">
+                   <Entry Text="{Binding Username.Value, Mode=TwoWay}" Placeholder="{i18n:Translate Username}">
                         <Entry.Style>
                             <OnPlatform x:TypeArguments="Style"
                                         iOS="{StaticResource EntryStyle}"
@@ -42,14 +42,14 @@
                         </Entry.Behaviors>
                         <Entry.Triggers>
                             <DataTrigger TargetType="Entry" Binding="{Binding Username.IsValid}" Value="False">
-                                <Setter Property="behavior:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
                             </DataTrigger>
                         </Entry.Triggers>
                     </Entry>
 
                     <Button Text="{i18n:Translate Confirm}" Command="{Binding RegistrationCommand}">
                         <Button.Style>
-                        <OnPlatform x:TypeArguments="Style"
+                            <OnPlatform x:TypeArguments="Style"
                                         iOS="{StaticResource ButtonStyle}"
                                         Android="{StaticResource ButtonStyle}"
                                         WinPhone="{StaticResource ButtonStyle}"/>
@@ -62,10 +62,10 @@
                                         Android="{StaticResource LabelStyle}"
                                         WinPhone="{StaticResource LabelStyle}"/>
                         </Label.Style>
-                        </Label>
+                    </Label>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
--->
+
 </ContentPage>
