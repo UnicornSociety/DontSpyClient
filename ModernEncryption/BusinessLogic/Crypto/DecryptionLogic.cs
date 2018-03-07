@@ -11,14 +11,14 @@ namespace ModernEncryption.BusinessLogic.Crypto
     {
         private readonly char[] _messageTextSymbols;
         private readonly Message _message;
-        //private readonly Dictionary<int, int> _keyTable;
+        private readonly Dictionary<int, int> _keyTable;
 
-        //public DecryptionLogic(Message message, Dictionary<int, int> keyTable)
-        public DecryptionLogic(Message message)
+        public DecryptionLogic(Message message, Dictionary<int, int> keyTable)
+        //public DecryptionLogic(Message message)
         {
             _message = message;
             _messageTextSymbols = message.Text.ToCharArray();
-            //_keyTable = keyTable;
+            _keyTable = keyTable;
         }
 
         public DecryptedMessage Decrypt()
@@ -28,8 +28,8 @@ namespace ModernEncryption.BusinessLogic.Crypto
             for (var i = 0; i < _messageTextSymbols.Length; i++)
             {
                 var permutedChipher = RevertCharacterPair(_messageTextSymbols[i], _messageTextSymbols[++i]);
-                var chiper = RevertPermutationFor(permutedChipher);
-                //var chiper = RevertPermutationFor(permutedChipher-1);//KeyTable geht von 0 bis 8099, deshlab -1 weil permutedCipher von 1 bis 8100 ist
+                //var chiper = RevertPermutationFor(permutedChipher);
+                var chiper = RevertPermutationFor(permutedChipher)+1;//KeyTable geht von 0 bis 8099, deshlab -1 weil permutedCipher von 1 bis 8100 ist
                 concatenatedDecryptedSymbols += RevertChipher(chiper);
                 if (chiper == '^')
                 {
@@ -49,16 +49,16 @@ namespace ModernEncryption.BusinessLogic.Crypto
         }
 
         private int RevertPermutationFor(int permutedChipher)
-        {
+        {/*
             if (MathematicalMappingLogic.KeyTable.ContainsKey(permutedChipher))
                 return MathematicalMappingLogic.KeyTable[permutedChipher];
             return permutedChipher;
-            /*
+            */
             if (_keyTable.ContainsValue(permutedChipher))
             {
                return _keyTable.FirstOrDefault(x => x.Value == permutedChipher).Key;
             }
-            return permutedChipher;*/
+            return permutedChipher;
         }
 
         private char RevertChipher(int chiper)
