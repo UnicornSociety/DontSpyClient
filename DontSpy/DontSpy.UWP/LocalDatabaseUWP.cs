@@ -9,13 +9,13 @@ using SQLite.Net.Platform.WinRT;
 [assembly: Xamarin.Forms.Dependency(typeof(LocalDatabaseUwp))]
 namespace DontSpy.UWP
 {
-    public class LocalDatabaseUwp : DontSpy.Interfaces.IStorage
+    public class LocalDatabaseUwp : Interfaces.IStorage
     {
         private SQLiteConnectionWithLock _conn;
 
         private static string GetDatabasePath()
         {
-            return Path.Combine(ApplicationData.Current.LocalFolder.Path, DontSpy.Constants.LocalDatabaseName);
+            return Path.Combine(ApplicationData.Current.LocalFolder.Path, Constants.LocalDatabaseName);
         }
 
         public SQLiteConnection GetConnection()
