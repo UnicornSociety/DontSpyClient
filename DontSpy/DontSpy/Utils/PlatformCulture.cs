@@ -2,7 +2,7 @@
 
 namespace DontSpy.Utils
 {
-    internal class PlatformCulture
+    public class PlatformCulture
     {
         public PlatformCulture(string platformCultureString)
         {
