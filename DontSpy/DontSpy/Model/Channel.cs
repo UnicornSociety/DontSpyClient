@@ -15,7 +15,7 @@ namespace DontSpy.Model
     {
         private ChannelPage _channelView;
 
-        private readonly IKeyHandling _keyHandler = new KeyHandling();
+        private readonly IKeyHandler _keyHandler = new KeyHandlerLogic();
 
         [PrimaryKey, Unique, Column("id"), MaxLength(40)]
         public string Id { get; set; }
@@ -35,11 +35,11 @@ namespace DontSpy.Model
 
         [Ignore]
         public Dictionary<int, int> KeyTable
-        { 
+        {
             get
             {
                 if (_keyTable != null) return _keyTable;
-                var key = CrossSecureStorage.Current.GetValue(Id);
+                var key = DependencyService.Get<IStorage>().GetValueFromKey(Id);
                 int[] _key = key.Split(';').Select(int.Parse).ToArray();
                 //int[] _key = key.Split(';').Select(n => Convert.ToInt32(n)).ToArray();
                 _keyTable = _keyHandler.KeyTable(_key);
@@ -54,20 +54,27 @@ namespace DontSpy.Model
         {
         }
 
-        public Channel(string id, List<User> members, string name = null)
+        public Channel(string id, List<User> members, string name = null, bool generateKey = true)
         {
-            var key = _keyHandler.ProduceKeys(8100);
-            var empty = "";
-            for (int number = 0; number < key.Length-1; number++)
+            if(generateKey) {
+                var key = _keyHandler.ProduceKeys(8100);
+                var empty = "";
+                for (var number = 0; number < key.Length-1; number++)
+                {
+                    var _key = empty + key[number] + ";";
+                    empty = _key;
+                }
+                empty = empty + key[key.Length-1];
+                CrossSecureStorage.Current.SetValue(id, empty);
+            } else
             {
-                var _key = empty + key[number] + ";";
-                empty = _key;
+                // TODO: Waiting for key (QR Code)
             }
             empty = empty + key[key.Length-1];
-            CrossSecureStorage.Current.SetValue(id, empty);
+            DependencyService.Get<IStorage>().SetValueWithKey(id, empty);
             Id = id;
             Members = members;
-            
+
 
             if (name == null)
             {

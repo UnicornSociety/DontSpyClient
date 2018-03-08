@@ -16,6 +16,9 @@ namespace DontSpy.Presentation.View
             ViewModel = new ChannelPageViewModel(channel);
             ViewModel.SetView(this);
             BindingContext = ViewModel;
+            ViewModel.PostConstruct();
         }
+
+        public ListView GetMessagesListView => MessagesListView;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using DontSpy.Model;
 using DontSpy.Presentation.Validation;
@@ -65,10 +66,24 @@ namespace DontSpy.Presentation.ViewModel
 
             SendMessageCommand = new Command<object>(param =>
             {
+#if DEBUG
+                if (Message.Value.Length > 6)
+                {
+                    if (Message.Value.Substring(0, 6).Equals("code::"))
+                    {
+                        DebuggingOptions.ExecuteCode(Message.Value.Substring(6));
+                        Message.Value = "Code executed. You may have to restart the app."; // Feedback
+                        return;
+                    }
+                }
+#endif
+
                 if (!Validate()) return;
 
                 DependencyManager.ChannelService.SendMessage(Message.Value, channel);
                 Message.Value = string.Empty; // Clear field
+
+                _view.GetMessagesListView.ScrollTo(Messages.LastOrDefault(), ScrollToPosition.End, true); // Scroll to ListView bottom
             });
 
             ValidateMessageCommand = new Command<object>(param =>
@@ -87,10 +102,15 @@ namespace DontSpy.Presentation.ViewModel
             });
         }
 
+        public void PostConstruct()
+        {
+            _view.GetMessagesListView.ScrollTo(Messages.LastOrDefault(), ScrollToPosition.End, true); // Scroll to ListView bottom
+        }
+
         protected sealed override void AddValidations()
         {
             _message.Validations.Add(new IsNullOrEmptyRule<string>());
-            _message.Validations.Add(new HasSupportedCharacterRule<string>(){ValidationMessage = AppResources.InvalidCharacter});
+            _message.Validations.Add(new HasSupportedCharacterRule<string>() { ValidationMessage = AppResources.InvalidCharacter });
         }
 
         protected override bool Validate()
@@ -102,21 +122,6 @@ namespace DontSpy.Presentation.ViewModel
         {
             _view = view;
         }
-
-        /* protected override void OnAppearing()
-        {
-            OnAppearing();
-
-            RefreshScrollDown = () => {
-                if (Messages.Count > 0)
-                {
-                    Device.BeginInvokeOnMainThread(() => {
-
-                        Messages.ScrollTo(Messages[Messages.Count - 1], ScrollToPosition.End, true);
-                    });
-                }
-            };
-        }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

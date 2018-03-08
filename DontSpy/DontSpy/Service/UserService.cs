@@ -5,6 +5,7 @@ using DontSpy.Interfaces;
 using DontSpy.Model;
 using Plugin.SecureStorage;
 using SQLiteNetExtensions.Extensions;
+using Xamarin.Forms;
 
 namespace DontSpy.Service
 {
@@ -22,7 +23,7 @@ namespace DontSpy.Service
             new Task(() => { RestService.CreateOwnUser(user); }).Start(); // TODO: Handle in future if request is not succeeded
 
             DependencyManager.Database.Insert(user);
-            CrossSecureStorage.Current.SetValue("OwnUser", user.Id);
+            DependencyService.Get<IStorage>().SetValueWithKey("OwnUser", user.Id);
             DependencyManager.Me = user;
 
             return true;

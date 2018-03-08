@@ -25,8 +25,8 @@ namespace DontSpy.Service
                     foreach (var message in RestService.GetMessageBy(channel.Id).Result)
                     {
                         if (channel.Messages.Exists(item => item.Id == message.Id)) continue; // If message exists
-                        //IDecrypt decryption = new DecryptionLogic(message, channel.KeyTable);
-                        IDecrypt decryption = new DecryptionLogic(message);
+                        IDecrypt decryption = new DecryptionLogic(message, channel.KeyTable);
+                        //IDecrypt decryption = new DecryptionLogic(message);
                         channel.View.ViewModel.Messages.Add(decryption.Decrypt());
                         channel.Messages.Add(message);
                         DependencyManager.Database.InsertWithChildren(message);
@@ -65,7 +65,7 @@ namespace DontSpy.Service
                         if (member == null) continue;
                         members.Add(member);
                     }
-                    var channel = new Channel(newChannelIdentifier, members);
+                    var channel = new Channel(newChannelIdentifier, members, null, false);
                     channel.Messages.Add(new Message(sender, message.Text) { Timestamp = message.Timestamp });
                     DependencyManager.ChannelsPage.ViewModel.Channels.Add(channel);
                     DependencyManager.Database.InsertOrReplaceWithChildren(channel);
