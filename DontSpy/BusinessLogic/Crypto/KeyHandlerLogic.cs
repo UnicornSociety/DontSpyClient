@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using DontSpy.Interfaces;
 
 namespace DontSpy.BusinessLogic.Crypto
@@ -41,6 +42,21 @@ namespace DontSpy.BusinessLogic.Crypto
             }
 
             return tableOfKeys;
+        }
+
+        public int[] SplitKeys(string key)
+        {
+            int[] _key = new int[8100];
+            int lauf = 0;
+            for (int i = 0; i < key.Length / 2; i++)
+            {
+                var keyA = MathematicalMappingLogic.BackTransformationTable[key[lauf]];
+                var keyB = MathematicalMappingLogic.BackTransformationTable[key[lauf + 1]];
+                _key[i] = (keyA - 1) * 90 + keyB;
+                Debug.WriteLine(_key[i]);
+                lauf = lauf + 2;
+            }
+            return _key;
         }
     }
 

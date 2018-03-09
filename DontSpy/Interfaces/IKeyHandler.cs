@@ -6,5 +6,6 @@ namespace DontSpy.Interfaces
     {
         int[] ProduceKeys(int n);
         Dictionary<int, int> KeyTable(int[] key);
+        int[] SplitKeys(string key);
     }
 }
