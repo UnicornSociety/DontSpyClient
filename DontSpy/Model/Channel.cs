@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using DontSpy.BusinessLogic.Crypto;
 using DontSpy.Interfaces;
@@ -49,7 +50,7 @@ namespace DontSpy.Model
             get
             {
                 if (_keyTable != null) return _keyTable;
-                var key = DependencyService.Get<IStorage>().GetValueFromKey(Id).Split(';').Select(int.Parse).ToArray();
+                var key = DependencyService.Get<IStorage>().GetValueFromKey(Id);
                 var keyTable = _keyHandler.KeyTable(key);
                 _keyTable = keyTable;
                 return _keyTable;
@@ -67,14 +68,15 @@ namespace DontSpy.Model
             KeyInformation = keyMetadata;
 
             var key = _keyHandler.ProduceKeys(8100);
-            var empty = "";
-            for (var number = 0; number < key.Length - 1; number++)
+            var _key = "";
+            foreach (var number in key)
             {
-                empty = empty + key[number] + ";";
+                var keyA = number / 90 + 1;
+                var keyB = number % 90 + 1;
+                _key = _key + MathematicalMappingLogic.TransformationTable[keyA] + MathematicalMappingLogic.TransformationTable[keyB];
             }
-            empty = empty + key[key.Length - 1];
 
-            DependencyService.Get<IStorage>().SetValueWithKey(Id, empty);
+            DependencyService.Get<IStorage>().SetValueWithKey(Id, _key);
 
             if (name == null)
             {
