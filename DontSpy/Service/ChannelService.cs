@@ -27,7 +27,7 @@ namespace DontSpy.Service
         public Channel CreateChannel(List<User> members, string channelName = null)
         {
             var channelIdentifier = IdentifierCreator.UniqueDigits();
-            var channel = new Channel(channelIdentifier, members, channelName);
+            var channel = new Channel(channelIdentifier, members, Channel.KeyMetadata.InitiatorKeyNotDisplayed, channelName);
             DependencyManager.ChannelsPage.ViewModel.Channels.Add(channel);
             DependencyManager.Database.InsertOrReplaceWithChildren(channel);
 

@@ -64,7 +64,7 @@ namespace DontSpy.Service
                         if (member == null) continue;
                         members.Add(member);
                     }
-                    var channel = new Channel(newChannelIdentifier, members, null, false);
+                    var channel = new Channel(newChannelIdentifier, members, Channel.KeyMetadata.ConcernedKeyless);
                     channel.Messages.Add(new Message(sender, message.Text) { Timestamp = message.Timestamp });
                     DependencyManager.ChannelsPage.ViewModel.Channels.Add(channel);
                     DependencyManager.Database.InsertOrReplaceWithChildren(channel);

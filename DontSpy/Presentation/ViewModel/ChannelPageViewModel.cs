@@ -19,20 +19,7 @@ namespace DontSpy.Presentation.ViewModel
         public ObservableCollection<DecryptedMessage> Messages { get; } = new ObservableCollection<DecryptedMessage>();
         public ICommand SendMessageCommand { protected set; get; }
         public ICommand ValidateMessageCommand { protected set; get; }
-        public ICommand ShowKeyCommand { protected set; get; }
         public Page KeyPage { get; set; }
-        private bool _keyVisibility = true;
-
-        public bool KeyVisibility
-        {
-            get => _keyVisibility;
-            set
-            {
-                if (_keyVisibility == value) return;
-                _keyVisibility = value;
-                OnPropertyChanged("KeyVisibility");
-            }
-        }
 
         public string Title
         {
@@ -89,16 +76,6 @@ namespace DontSpy.Presentation.ViewModel
             ValidateMessageCommand = new Command<object>(param =>
             {
                 Validate();
-            });
-
-            KeyVisibility = channel.ChannelKeyVisibility;
-
-            ShowKeyCommand = new Command<object>(param =>
-            {
-                DependencyManager.AnchorPage.Children[1].Navigation.PopToRootAsync(false);
-                _view.Navigation.PushAsync(new KeyPage());
-                KeyVisibility = false;
-                channel.ChannelKeyVisibility = false;
             });
         }
 

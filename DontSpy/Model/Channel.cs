@@ -4,7 +4,6 @@ using DontSpy.BusinessLogic.Crypto;
 using DontSpy.Interfaces;
 using DontSpy.Presentation.View;
 using DontSpy.Translations;
-using Plugin.SecureStorage;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 using Xamarin.Forms;
@@ -32,7 +31,17 @@ namespace DontSpy.Model
         [Ignore]
         public ChannelPage View => _channelView ?? (_channelView = new ChannelPage(this));
 
-		private Dictionary<int, int> _keyTable;
+        public KeyMetadata KeyInformation { get; }
+
+        public enum KeyMetadata
+        {
+            InitiatorKeyNotDisplayed,
+            InitiatorKeyDisplayed,
+            ConcernedKeyless,
+            ConcernedHasKey
+        }
+
+        private Dictionary<int, int> _keyTable;
 
         [Ignore]
         public Dictionary<int, int> KeyTable
@@ -40,41 +49,32 @@ namespace DontSpy.Model
             get
             {
                 if (_keyTable != null) return _keyTable;
-                var key = DependencyService.Get<IStorage>().GetValueFromKey(Id);
-                int[] _key = key.Split(';').Select(int.Parse).ToArray();
-                //int[] _key = key.Split(';').Select(n => Convert.ToInt32(n)).ToArray();
-                _keyTable = _keyHandler.KeyTable(_key);
+                var key = DependencyService.Get<IStorage>().GetValueFromKey(Id).Split(';').Select(int.Parse).ToArray();
+                var keyTable = _keyHandler.KeyTable(key);
+                _keyTable = keyTable;
                 return _keyTable;
             }
         }
-
-        [Ignore]
-        public bool ChannelKeyVisibility { get; set; } = true;
 
         public Channel()
         {
         }
 
-        public Channel(string id, List<User> members, string name = null, bool generateKey = true)
+        public Channel(string id, List<User> members, KeyMetadata keyMetadata, string name = null)
         {
-            if(generateKey) {
-                var key = _keyHandler.ProduceKeys(8100);
-                var empty = "";
-                for (var number = 0; number < key.Length-1; number++)
-                {
-                    var _key = empty + key[number] + ";";
-                    empty = _key;
-                }
-                empty = empty + key[key.Length - 1];
-                DependencyService.Get<IStorage>().SetValueWithKey(id, empty);
-            } else
-            {
-                // TODO: Waiting for key (QR Code)
-            }
-            
             Id = id;
             Members = members;
+            KeyInformation = keyMetadata;
 
+            var key = _keyHandler.ProduceKeys(8100);
+            var empty = "";
+            for (var number = 0; number < key.Length - 1; number++)
+            {
+                empty = empty + key[number] + ";";
+            }
+            empty = empty + key[key.Length - 1];
+
+            DependencyService.Get<IStorage>().SetValueWithKey(Id, empty);
 
             if (name == null)
             {
