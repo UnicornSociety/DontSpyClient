@@ -218,24 +218,24 @@ namespace DontSpy.Presentation.ViewModel
         {
             paintingArgs.Surface.Canvas.Clear();
 
-            var signsPerQrCode = 2025;
-            var sumKeyQrCodeBitmaps = new QrCodeLogic().Create(DependencyService.Get<IStorage>().GetValueFromKey(_channel.Id), signsPerQrCode, 390);
+            var signsPerQrCode = 1620;
+            var sumKeyQrCodeBitmaps = new QrCodeLogic().Create(DependencyService.Get<IStorage>().GetValueFromKey(_channel.Id), signsPerQrCode, 300);
 
             var posX = 0;
             var posY = 0;
             for (int i = 0; i < sumKeyQrCodeBitmaps.Count; i++)
             {
                 paintingArgs.Surface.Canvas.DrawBitmap(sumKeyQrCodeBitmaps[i], posX, posY);
-                posX += 390;
+                posX += 301;
 
-                if (i == 3)
+                if (i == 4 )
                 {
                     posX = 0;
-                    posY = 390;
+                    posY = 301;
                 }
 
+
             }
-            
                         /*
                         var surfaceWidth = paintingArgs.Info.Width;
                         var surfaceHeight = paintingArgs.Info.Height;
