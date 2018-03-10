@@ -67,31 +67,19 @@ namespace DontSpy.Model
             Members = members;
             KeyInformation = keyMetadata;
 
-<<<<<<< HEAD
             if (keyMetadata == KeyMetadata.InitiatorKeyNotDisplayed)
             {
                 var key = _keyHandler.ProduceKeys(8100);
-                var empty = "";
-                for (var number = 0; number < key.Length - 1; number++)
+                var _key = "";
+                foreach (var number in key)
                 {
-                    empty = empty + key[number] + ";";
+                    var keyA = number / 90 + 1;
+                    var keyB = number % 90 + 1;
+                    _key = _key + MathematicalMappingLogic.TransformationTable[keyA] + MathematicalMappingLogic.TransformationTable[keyB];
                 }
-                empty = empty + key[key.Length - 1];
 
-                DependencyService.Get<IStorage>().SetValueWithKey(Id, empty);
+                DependencyService.Get<IStorage>().SetValueWithKey(Id, _key);
             }
-=======
-            var key = _keyHandler.ProduceKeys(8100);
-            var _key = "";
-            foreach (var number in key)
-            {
-                var keyA = number / 90 + 1;
-                var keyB = number % 90 + 1;
-                _key = _key + MathematicalMappingLogic.TransformationTable[keyA] + MathematicalMappingLogic.TransformationTable[keyB];
-            }
-
-            DependencyService.Get<IStorage>().SetValueWithKey(Id, _key);
->>>>>>> 9719a6be009923559c15b58f6492d40d399ea34e
 
             if (name == null)
             {
