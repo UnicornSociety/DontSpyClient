@@ -5,6 +5,7 @@
              xmlns:converter="clr-namespace:DontSpy.Presentation.Converter"
              xmlns:i18n="clr-namespace:DontSpy.Presentation.View;assembly=DontSpy"
              xmlns:behavior="clr-namespace:DontSpy.Presentation.Behaviors"
+             xmlns:views="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
@@ -15,20 +16,44 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" BackgroundColor ="White">
-            <ListView x:Name="MessagesListView" ItemsSource="{Binding Messages}">
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+            <Label Text="{Binding PathToQrCode}" BackgroundColor="Red" IsVisible="{Binding KeyCreationVisibility}" />
+            <Button Text="Never show key again" HorizontalOptions="Center" Command="{Binding ExitKeyDisplaying}" IsVisible="{Binding KeyCreationVisibility}">
+                <Button.Style>
+                    <OnPlatform x:TypeArguments="Style"
+                                iOS="{StaticResource ButtonStyle}"  
+                                Android="{StaticResource ButtonStyle}"
+                                WinPhone="{StaticResource ButtonStyle}"/>
+                </Button.Style>
+            </Button>
+            <Grid IsVisible="{Binding KeyCreationVisibility}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <views:SKCanvasView PaintSurface="OnKeyPainting" />
+            </Grid>
+
+            <StackLayout IsVisible="{Binding KeyConfigurationVisibility}"  VerticalOptions="FillAndExpand">
+                <Button Text="Take via camera" HorizontalOptions="Center" Command="{Binding KeyViaCameraCommand}">
+                    <Button.Style>
+                        <OnPlatform x:TypeArguments="Style"
+                                    iOS="{StaticResource ButtonStyle}"  
+                                    Android="{StaticResource ButtonStyle}"
+                                    WinPhone="{StaticResource ButtonStyle}"/>
+                    </Button.Style>
+                </Button>
+                <Button Text="Choose from gallery" HorizontalOptions="Center" Command="{Binding KeyViaGalleryCommand}">
+                    <Button.Style>
+                        <OnPlatform x:TypeArguments="Style"
+                                    iOS="{StaticResource ButtonStyle}"  
+                                    Android="{StaticResource ButtonStyle}"
+                                    WinPhone="{StaticResource ButtonStyle}"/>
+                    </Button.Style>
+                </Button>
+            </StackLayout>
+
+            <ListView x:Name="MessagesListView" IsVisible="{Binding MessageListViewVisibility}" ItemsSource="{Binding Messages}">
                 <ListView.Header>
                     <StackLayout HorizontalOptions="FillAndExpand">
-						<Label Text="{i18n:Translate ChannelHeading}" Font="Bold" HorizontalTextAlignment="Center"/>
-                        <Button Text="{i18n:Translate Key}" HorizontalOptions="Center" Command ="{Binding ShowKeyCommand}" IsVisible="{Binding KeyVisibility}" >
-                            <Button.Style>
-                                <OnPlatform x:TypeArguments="Style"
-                                        iOS="{StaticResource ButtonStyle}"  
-                                        Android="{StaticResource ButtonStyle}"
-                                        WinPhone="{StaticResource ButtonStyle}"/>
-                            </Button.Style>
-                        </Button>
-					</StackLayout>
+                                <Label Text="{i18n:Translate ChannelHeading}" Font="Bold" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
                 </ListView.Header>
 
                 <ListView.Footer>

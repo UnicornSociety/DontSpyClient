@@ -1,4 +1,5 @@
-﻿using SQLite.Net;
+﻿using System.Threading.Tasks;
+using SQLite.Net;
 using SQLite.Net.Async;
 
 namespace DontSpy.Interfaces
@@ -14,6 +15,6 @@ namespace DontSpy.Interfaces
         bool DeleteValueFromKey(string key);
         bool CheckValueFromKeyExists(string key);
         bool ClearKeyValueStorage();
-        void SaveImage(string filename, byte[] stream);
+        Task<string> SaveImage(string filename, byte[] stream);
     }
 }

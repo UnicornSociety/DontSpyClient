@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Windows.Storage;
 using DontSpy.UWP;
 using SQLite.Net;
@@ -63,11 +64,12 @@ namespace DontSpy.UWP
             GC.WaitForPendingFinalizers();
         }
 
-        public async void SaveImage(string filename, byte[] stream)
+        public async Task<string> SaveImage(string filename, byte[] stream)
         {
-            var localFolder = ApplicationData.Current.LocalFolder;
-            var file = await localFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+            var localSharedFolder = ApplicationData.Current.LocalFolder;
+            var file = await localSharedFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteBytesAsync(file, stream);
+            return Path.Combine(localSharedFolder.Path, filename);
         }
     }
 }
