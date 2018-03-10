@@ -66,7 +66,7 @@ namespace DontSpy.UWP
 
         public async Task<string> SaveImage(string filename, byte[] stream)
         {
-            var localSharedFolder = ApplicationData.Current.LocalFolder;
+            var localSharedFolder = ApplicationData.Current.LocalCacheFolder;
             var file = await localSharedFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteBytesAsync(file, stream);
             return Path.Combine(localSharedFolder.Path, filename);

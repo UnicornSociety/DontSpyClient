@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -217,20 +218,40 @@ namespace DontSpy.Presentation.ViewModel
         {
             paintingArgs.Surface.Canvas.Clear();
 
-            var surfaceWidth = paintingArgs.Info.Width;
-            var surfaceHeight = paintingArgs.Info.Height;
-            var signsPerQrCode = 2500;
-            var key = DependencyService.Get<IStorage>().GetValueFromKey(_channel.Id);
-            var sumQrCodesNeeded = key.Length / signsPerQrCode;
-            if (key.Length % signsPerQrCode > 0) sumQrCodesNeeded++;
+            var signsPerQrCode = 2025;
+            var sumKeyQrCodeBitmaps = new QrCodeLogic().Create(DependencyService.Get<IStorage>().GetValueFromKey(_channel.Id), signsPerQrCode, 390);
 
-            // TODO: Use space optimal
-            var qrCodeWidthHeight = 500;
-            var sumKeyQrCodeBitmaps = new QrCodeLogic().Create(DependencyService.Get<IStorage>().GetValueFromKey(_channel.Id), signsPerQrCode, qrCodeWidthHeight);
-            // TODO: End
+            var posX = 0;
+            var posY = 0;
+            for (int i = 0; i < sumKeyQrCodeBitmaps.Count; i++)
+            {
+                paintingArgs.Surface.Canvas.DrawBitmap(sumKeyQrCodeBitmaps[i], posX, posY);
+                posX += 390;
+
+                if (i == 3)
+                {
+                    posX = 0;
+                    posY = 390;
+                }
+
+            }
+            
+                        /*
+                        var surfaceWidth = paintingArgs.Info.Width;
+                        var surfaceHeight = paintingArgs.Info.Height;
+                        var signsPerQrCode = 2500;
+                        var key = DependencyService.Get<IStorage>().GetValueFromKey(_channel.Id);
+                        var sumQrCodesNeeded = key.Length / signsPerQrCode;
+                        if (key.Length % signsPerQrCode > 0) sumQrCodesNeeded++;
+
+                        // TODO: Use space optimal
+                        var qrCodeWidthHeight = 500;
+                        var sumKeyQrCodeBitmaps = new QrCodeLogic().Create(DependencyService.Get<IStorage>().GetValueFromKey(_channel.Id), signsPerQrCode, qrCodeWidthHeight);
+                        // TODO: End
+                        */
 
             var aggregatedQrCodeBitmap = paintingArgs.Surface.Snapshot().PeekPixels().Encode(SKEncodedImageFormat.Png, 100);
-            PathToQrCode = await DependencyService.Get<IStorage>().SaveImage(_channel.Id + ".png", aggregatedQrCodeBitmap.ToArray());
+           PathToQrCode = AppResources.PathToQrCode + " " + await DependencyService.Get<IStorage>().SaveImage(_channel.Id + ".png", aggregatedQrCodeBitmap.ToArray());
         }
     }
 }

@@ -159,17 +159,29 @@
   <data name="KeyText" xml:space="preserve">
     <value>The key for this channel. </value>
   </data>
+  <data name="KeyViaCamera" xml:space="preserve">
+    <value>Scan QR code via camera</value>
+  </data>
+  <data name="KeyViaGallery" xml:space="preserve">
+    <value>Choose QR code from gallery</value>
+  </data>
   <data name="MessageSnippetMoreSign" xml:space="preserve">
     <value>...</value>
   </data>
   <data name="MoreMembers" xml:space="preserve">
     <value>more members</value>
   </data>
+  <data name="NeverShowKeyAgain" xml:space="preserve">
+    <value>Destroy QR code</value>
+  </data>
   <data name="NewChatCallToAction" xml:space="preserve">
     <value>N e w   C h a t</value>
   </data>
   <data name="NewGroupCallToAction" xml:space="preserve">
     <value>N e w   G r o u p</value>
+  </data>
+  <data name="PathToQrCode" xml:space="preserve">
+    <value>Path to QR code: </value>
   </data>
   <data name="RegisterRequest" xml:space="preserve">
     <value>Please register.</value>
