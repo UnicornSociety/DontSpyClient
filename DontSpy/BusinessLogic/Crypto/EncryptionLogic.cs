@@ -9,13 +9,14 @@ namespace DontSpy.BusinessLogic.Crypto
     {
         private readonly char[] _messageTextSymbols;
         private readonly Message _message;
-        private readonly Dictionary<int, int> _keyTable;
+        //private readonly Dictionary<int, int> _keyTable;
 
-        public EncryptionLogic(Message message, Dictionary<int, int> keyTable)
+        //public EncryptionLogic(Message message, Dictionary<int, int> keyTable)
+        public EncryptionLogic(Message message)
         {
             _message = message;
             _messageTextSymbols = message.Text.ToCharArray();
-            _keyTable = keyTable;
+            //_keyTable = keyTable;
         }
 
         public Message Encrypt()
@@ -43,9 +44,12 @@ namespace DontSpy.BusinessLogic.Crypto
 
         private int RunPermutationFor(int chipher)
         {
+            if (MathematicalMappingLogic.KeyTable.ContainsKey(chipher))
+                return MathematicalMappingLogic.KeyTable[chipher];
+            return chipher;/*
             if (_keyTable.ContainsKey(chipher))
                 return _keyTable[chipher];
-            return chipher;
+            return chipher;*/
         }
 
         private string CreateCharacterPair(int permutedChipher)
