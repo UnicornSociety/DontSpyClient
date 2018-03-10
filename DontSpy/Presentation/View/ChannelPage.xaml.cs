@@ -1,5 +1,6 @@
 ﻿using DontSpy.Model;
 using DontSpy.Presentation.ViewModel;
+using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,5 +21,10 @@ namespace DontSpy.Presentation.View
         }
 
         public ListView GetMessagesListView => MessagesListView;
+
+        private void OnKeyPainting(object sender, SKPaintSurfaceEventArgs e)
+        {
+            ViewModel.KeyPainting(e);
+        }
     }
 }

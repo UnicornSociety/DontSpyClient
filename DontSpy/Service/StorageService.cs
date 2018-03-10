@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DontSpy.Interfaces;
 using Plugin.SecureStorage;
 using SQLite.Net;
@@ -75,7 +76,7 @@ namespace DontSpy.Service
             return success;
         }
 
-        public void SaveImage(string filename, byte[] stream)
+        public Task<string> SaveImage(string filename, byte[] stream)
         {
             throw new System.NotImplementedException();
         }

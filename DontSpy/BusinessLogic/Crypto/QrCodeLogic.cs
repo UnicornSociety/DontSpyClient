@@ -16,7 +16,7 @@ namespace DontSpy.BusinessLogic.Crypto
 {
     internal class QrCodeLogic
     {
-        public List<SKBitmap> Create(string content, int signsPerQrCode, int width, int height)
+        public List<SKBitmap> Create(string content, int signsPerQrCode, int widthHeight)
         {
             var qrCodes = new List<SKBitmap>();
 
@@ -31,8 +31,8 @@ namespace DontSpy.BusinessLogic.Crypto
                     Format = BarcodeFormat.QR_CODE,
                     Options = new QrCodeEncodingOptions
                     {
-                        Width = width,
-                        Height = height
+                        Width = widthHeight,
+                        Height = widthHeight
                     }
                 }.Write(sumQrCodesCounter++ + ";" + sumQrCodes + "#" + content.Substring(i, Math.Min(signsPerQrCode, content.Length - i))));
             }

@@ -31,7 +31,7 @@ namespace DontSpy.Model
         [Ignore]
         public ChannelPage View => _channelView ?? (_channelView = new ChannelPage(this));
 
-        public KeyMetadata KeyInformation { get; }
+        public KeyMetadata KeyInformation { get; set; }
 
         public enum KeyMetadata
         {
@@ -66,15 +66,18 @@ namespace DontSpy.Model
             Members = members;
             KeyInformation = keyMetadata;
 
-            var key = _keyHandler.ProduceKeys(8100);
-            var empty = "";
-            for (var number = 0; number < key.Length - 1; number++)
+            if (keyMetadata == KeyMetadata.InitiatorKeyNotDisplayed)
             {
-                empty = empty + key[number] + ";";
-            }
-            empty = empty + key[key.Length - 1];
+                var key = _keyHandler.ProduceKeys(8100);
+                var empty = "";
+                for (var number = 0; number < key.Length - 1; number++)
+                {
+                    empty = empty + key[number] + ";";
+                }
+                empty = empty + key[key.Length - 1];
 
-            DependencyService.Get<IStorage>().SetValueWithKey(Id, empty);
+                DependencyService.Get<IStorage>().SetValueWithKey(Id, empty);
+            }
 
             if (name == null)
             {
