@@ -55,22 +55,8 @@ namespace DontSpy.Model
         {
         }
 
-        public Channel(string id, List<User> members, string name = null, bool generateKey = true)
+        public Channel(string id, List<User> members, string name = null)
         {
-            if(generateKey) {
-                var key = _keyHandler.ProduceKeys(8100);
-                var empty = "";
-                for (var number = 0; number < key.Length-1; number++)
-                {
-                    var _key = empty + key[number] + ";";
-                    empty = _key;
-                }
-                empty = empty + key[key.Length - 1];
-                DependencyService.Get<IStorage>().SetValueWithKey(id, empty);
-            } else
-            {
-                // TODO: Waiting for key (QR Code)
-            }
             
             Id = id;
             Members = members;
