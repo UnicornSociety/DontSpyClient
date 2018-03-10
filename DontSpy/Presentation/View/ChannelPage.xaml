@@ -17,8 +17,8 @@
 
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
-            <Label Text="{Binding PathToQrCode}" BackgroundColor="Red" IsVisible="{Binding KeyCreationVisibility}" />
-            <Button Text="Never show key again" HorizontalOptions="Center" Command="{Binding ExitKeyDisplaying}" IsVisible="{Binding KeyCreationVisibility}">
+            <Label Text="{Binding PathToQrCode}" IsVisible="{Binding KeyCreationVisibility}" />
+            <Button Text="{i18n:Translate NeverShowKeyAgain}" HorizontalOptions="Center" Command="{Binding ExitKeyDisplaying}" IsVisible="{Binding KeyCreationVisibility}">
                 <Button.Style>
                     <OnPlatform x:TypeArguments="Style"
                                 iOS="{StaticResource ButtonStyle}"  
@@ -31,7 +31,7 @@
             </Grid>
 
             <StackLayout IsVisible="{Binding KeyConfigurationVisibility}"  VerticalOptions="FillAndExpand">
-                <Button Text="Take via camera" HorizontalOptions="Center" Command="{Binding KeyViaCameraCommand}">
+                <Button Text="{i18n:Translate KeyViaCamera}" HorizontalOptions="Center" Command="{Binding KeyViaCameraCommand}">
                     <Button.Style>
                         <OnPlatform x:TypeArguments="Style"
                                     iOS="{StaticResource ButtonStyle}"  
@@ -39,7 +39,7 @@
                                     WinPhone="{StaticResource ButtonStyle}"/>
                     </Button.Style>
                 </Button>
-                <Button Text="Choose from gallery" HorizontalOptions="Center" Command="{Binding KeyViaGalleryCommand}">
+                <Button Text="{i18n:Translate KeyViaGallery}" HorizontalOptions="Center" Command="{Binding KeyViaGalleryCommand}">
                     <Button.Style>
                         <OnPlatform x:TypeArguments="Style"
                                     iOS="{StaticResource ButtonStyle}"  

@@ -195,4 +195,16 @@
   <data name="CharacterError" xml:space="preserve">
     <value>ds</value>
   </data>
+  <data name="KeyViaCamera" xml:space="preserve">
+    <value>QR-Code mit Kamera aufnehmen</value>
+  </data>
+  <data name="KeyViaGallery" xml:space="preserve">
+    <value>QR-Code aus Galerie auswählen</value>
+  </data>
+  <data name="NeverShowKeyAgain" xml:space="preserve">
+    <value>QR-Code zerstören</value>
+  </data>
+  <data name="PathToQrCode" xml:space="preserve">
+    <value>Pfad zum QR-Code: </value>
+  </data>
 </root>

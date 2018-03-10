@@ -10,7 +10,8 @@
 
 using System.Reflection;
 
-namespace DontSpy.Translations {
+namespace DontSpy.Translations
+{
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -21,275 +22,379 @@ namespace DontSpy.Translations {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AppResources {
-        
+    public class AppResources
+    {
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppResources() {
+        internal AppResources()
+        {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+        public static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DontSpy.Translations.AppResources", typeof(AppResources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
-            get {
+        public static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to and.
         /// </summary>
-        public static string And {
-            get {
+        public static string And
+        {
+            get
+            {
                 return ResourceManager.GetString("And", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Conversation.
         /// </summary>
-        public static string ChannelHeading {
-            get {
+        public static string ChannelHeading
+        {
+            get
+            {
                 return ResourceManager.GetString("ChannelHeading", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Channels.
         /// </summary>
-        public static string Channels {
-            get {
+        public static string Channels
+        {
+            get
+            {
                 return ResourceManager.GetString("Channels", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Y o u r   c h a t s.
         /// </summary>
-        public static string ChannelsHeading {
-            get {
+        public static string ChannelsHeading
+        {
+            get
+            {
                 return ResourceManager.GetString("ChannelsHeading", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Confirm.
         /// </summary>
-        public static string Confirm {
-            get {
+        public static string Confirm
+        {
+            get
+            {
                 return ResourceManager.GetString("Confirm", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Contacts.
         /// </summary>
-        public static string Contacts {
-            get {
+        public static string Contacts
+        {
+            get
+            {
                 return ResourceManager.GetString("Contacts", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Y o u r   c o n t a c t s.
         /// </summary>
-        public static string ContactsHeading {
-            get {
+        public static string ContactsHeading
+        {
+            get
+            {
                 return ResourceManager.GetString("ContactsHeading", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Create Group.
         /// </summary>
-        public static string CreateGroup {
-            get {
+        public static string CreateGroup
+        {
+            get
+            {
                 return ResourceManager.GetString("CreateGroup", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to ?!Or2kR3&amp;öKsp64K&amp;ögrz b(KsKsp6EA&amp;ö4Kb(WC&amp;ögrR3p6b(Ä.p6i+!8.
         /// </summary>
-        public static string CryptedOnBoardingMessage {
-            get {
+        public static string CryptedOnBoardingMessage
+        {
+            get
+            {
                 return ResourceManager.GetString("CryptedOnBoardingMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Not an username..
         /// </summary>
-        public static string ErrorMsgNotUsername {
-            get {
+        public static string ErrorMsgNotUsername
+        {
+            get
+            {
                 return ResourceManager.GetString("ErrorMsgNotUsername", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Username too short or too long..
         /// </summary>
-        public static string ErrorMsgUsernameLength {
-            get {
+        public static string ErrorMsgUsernameLength
+        {
+            get
+            {
                 return ResourceManager.GetString("ErrorMsgUsernameLength", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Input message.
         /// </summary>
-        public static string InputMessage {
-            get {
+        public static string InputMessage
+        {
+            get
+            {
                 return ResourceManager.GetString("InputMessage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to There is an invalid character in your message. .
         /// </summary>
-        public static string InvalidCharacter {
-            get {
+        public static string InvalidCharacter
+        {
+            get
+            {
                 return ResourceManager.GetString("InvalidCharacter", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Key.
         /// </summary>
-        public static string Key {
-            get {
+        public static string Key
+        {
+            get
+            {
                 return ResourceManager.GetString("Key", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to The key for this channel. .
         /// </summary>
-        public static string KeyText {
-            get {
+        public static string KeyText
+        {
+            get
+            {
                 return ResourceManager.GetString("KeyText", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to ....
         /// </summary>
-        public static string MessageSnippetMoreSign {
-            get {
+        public static string MessageSnippetMoreSign
+        {
+            get
+            {
                 return ResourceManager.GetString("MessageSnippetMoreSign", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to more members.
         /// </summary>
-        public static string MoreMembers {
-            get {
+        public static string MoreMembers
+        {
+            get
+            {
                 return ResourceManager.GetString("MoreMembers", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to N e w   C h a t.
         /// </summary>
-        public static string NewChatCallToAction {
-            get {
+        public static string NewChatCallToAction
+        {
+            get
+            {
                 return ResourceManager.GetString("NewChatCallToAction", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to N e w   G r o u p.
         /// </summary>
-        public static string NewGroupCallToAction {
-            get {
+        public static string NewGroupCallToAction
+        {
+            get
+            {
                 return ResourceManager.GetString("NewGroupCallToAction", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Please register..
         /// </summary>
-        public static string RegisterRequest {
-            get {
+        public static string RegisterRequest
+        {
+            get
+            {
                 return ResourceManager.GetString("RegisterRequest", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Registration.
         /// </summary>
-        public static string RegistrationHeading {
-            get {
+        public static string RegistrationHeading
+        {
+            get
+            {
                 return ResourceManager.GetString("RegistrationHeading", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
-        public static string SearchCallToAction {
-            get {
+        public static string SearchCallToAction
+        {
+            get
+            {
                 return ResourceManager.GetString("SearchCallToAction", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Send.
         /// </summary>
-        public static string SendCallToAction {
-            get {
+        public static string SendCallToAction
+        {
+            get
+            {
                 return ResourceManager.GetString("SendCallToAction", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
-        public static string Username {
-            get {
+        public static string Username
+        {
+            get
+            {
                 return ResourceManager.GetString("Username", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Welcome to.
         /// </summary>
-        public static string WelcomeTo {
-            get {
+        public static string WelcomeTo
+        {
+            get
+            {
                 return ResourceManager.GetString("WelcomeTo", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Yesterday.
         /// </summary>
-        public static string Yesterday {
-            get {
+        public static string Yesterday
+        {
+            get
+            {
                 return ResourceManager.GetString("Yesterday", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to.
+        /// </summary>
+        public static string NeverShowKeyAgain
+        {
+            get
+            {
+                return ResourceManager.GetString("NeverShowKeyAgain", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to.
+        /// </summary>
+        public static string PathToQrCode
+        {
+            get
+            {
+                return ResourceManager.GetString("PathToQrCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to.
+        /// </summary>
+        public static string KeyViaCamera
+        {
+            get
+            {
+                return ResourceManager.GetString("KeyViaCamera", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to.
+        /// </summary>
+        public static string KeyViaGallery
+        {
+            get
+            {
+                return ResourceManager.GetString("KeyViaGallery", resourceCulture);
             }
         }
     }
