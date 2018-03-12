@@ -16,44 +16,13 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White">
-            <Label Text="{Binding PathToQrCode}" IsVisible="{Binding KeyCreationVisibility}" />
-            <Button Text="{i18n:Translate NeverShowKeyAgain}" HorizontalOptions="Center" Command="{Binding ExitKeyDisplaying}" IsVisible="{Binding KeyCreationVisibility}">
-                <Button.Style>
-                    <OnPlatform x:TypeArguments="Style"
-                                iOS="{StaticResource ButtonStyle}"  
-                                Android="{StaticResource ButtonStyle}"
-                                WinPhone="{StaticResource ButtonStyle}"/>
-                </Button.Style>
-            </Button>
-            <Grid IsVisible="{Binding KeyCreationVisibility}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <views:SKCanvasView PaintSurface="OnKeyPainting" />
-            </Grid>
-
-            <StackLayout IsVisible="{Binding KeyConfigurationVisibility}"  VerticalOptions="FillAndExpand">
-                <Button Text="{i18n:Translate KeyViaCamera}" HorizontalOptions="Center" Command="{Binding KeyViaCameraCommand}">
-                    <Button.Style>
-                        <OnPlatform x:TypeArguments="Style"
-                                    iOS="{StaticResource ButtonStyle}"  
-                                    Android="{StaticResource ButtonStyle}"
-                                    WinPhone="{StaticResource ButtonStyle}"/>
-                    </Button.Style>
-                </Button>
-                <Button Text="{i18n:Translate KeyViaGallery}" HorizontalOptions="Center" Command="{Binding KeyViaGalleryCommand}">
-                    <Button.Style>
-                        <OnPlatform x:TypeArguments="Style"
-                                    iOS="{StaticResource ButtonStyle}"  
-                                    Android="{StaticResource ButtonStyle}"
-                                    WinPhone="{StaticResource ButtonStyle}"/>
-                    </Button.Style>
-                </Button>
-            </StackLayout>
-
-            <ListView x:Name="MessagesListView" IsVisible="{Binding MessageListViewVisibility}" ItemsSource="{Binding Messages}">
+        <StackLayout VerticalOptions="FillAndExpand">
+            <ListView x:Name="listView" ItemsSource="{Binding Messages}">
                 <ListView.Header>
                     <StackLayout HorizontalOptions="FillAndExpand">
-                                <Label Text="{i18n:Translate ChannelHeading}" Font="Bold" HorizontalTextAlignment="Center"/>
-                            </StackLayout>
+                        <Label Text="{i18n:Translate ChannelHeading}" Font="Bold" HorizontalTextAlignment="Center"/>
+                        <!-- <Button Text="{i18n:Translate Key}" HorizontalOptions="Center" Command ="{Binding ShowKeyCommand}"   TextColor="Gray" BorderColor="Gray"  BorderRadius="0"></Button>-->
+                    </StackLayout>
                 </ListView.Header>
 
                 <ListView.Footer>
@@ -61,32 +30,25 @@
                         <StackLayout Orientation="Horizontal">
                             <Entry Text="{Binding Message.Value, Mode=TwoWay}" Placeholder="{i18n:Translate InputMessage}" HorizontalOptions="FillAndExpand" FontSize="20">
                                 <Entry.Style>
-                                    <OnPlatform x:TypeArguments="Style"
-                                            iOS="{StaticResource EntryStyle}"
-                                            Android="{StaticResource EntryStyle}"
+                                    <OnPlatform x:TypeArguments="Style"  
+                                            iOS="{StaticResource EntryStyle}"  
+                                            Android="{StaticResource EntryStyle}"  
                                             WinPhone="{StaticResource EntryStyle}"/>
-                            </Entry.Style>
-                            <Entry.Behaviors>
-                                <behavior:EventToCommandBehavior EventName="TextChanged" Command="{Binding ValidateMessageCommand}" />
-                            </Entry.Behaviors>
-                            <Entry.Triggers>
-                                <DataTrigger TargetType="Entry" Binding="{Binding Message.IsValid}" Value="False">
-                                    <Setter Property="behavior:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
-                                </DataTrigger>
-                            </Entry.Triggers>
-                        </Entry>
-                        <Button Text="{i18n:Translate SendCallToAction}"  HorizontalOptions="End" Command="{Binding SendMessageCommand}">
-                            <Button.Style>
-                                <OnPlatform x:TypeArguments="Style"
-                                        iOS="{StaticResource BlueButtonStyle}"
-                                        Android="{StaticResource BlueButtonStyle}"
-                                        WinPhone="{StaticResource BlueButtonStyle}"/>
-                            </Button.Style>
-                        </Button>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Label FontSize="12" TextColor="Red"  Text="{Binding Message.Errors, Converter={StaticResource FirstValidationErrorConverter}" IsVisible="true" /> <!-- TODO: Replace with Button.Style for validations -->
-                    </StackLayout>
+                                </Entry.Style>
+                                <Entry.Behaviors>
+                                    <behavior:EventToCommandBehavior EventName="TextChanged" Command="{Binding ValidateMessageCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry" Binding="{Binding Message.IsValid}" Value="False">
+                                        <Setter Property="behavior:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                            <Button Text="{i18n:Translate SendCallToAction}" TextColor="White"  HorizontalOptions="End" FontSize="20" BackgroundColor="#3A99D8" BorderRadius="10" Command="{Binding SendMessageCommand}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label FontSize="12" TextColor="Red"  Text="{Binding Message.Errors, Converter={StaticResource FirstValidationErrorConverter}" IsVisible="true"></Label>
+                        </StackLayout>
                     </StackLayout>
                 </ListView.Footer>
 
@@ -99,23 +61,8 @@
                                         <Label Text="{Binding Text}"  BackgroundColor="#fff" FontSize="Medium" />
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand"  Padding="5">
-                                        <Label Text="{Binding Timestamp, Converter={StaticResource TimestampConverter}}"  FontSize="Micro">
-                                            <Label.Style>
-                                                <OnPlatform x:TypeArguments="Style"
-                                                    iOS="{StaticResource TimestampStyle}"
-                                                    Android="{StaticResource TimestampStyle}"
-                                                    WinPhone="{StaticResource TimestampStyle}"/>
-                                            </Label.Style>
-                                        </Label>
-
-                                        <Label Text="{Binding Sender.Username}">
-                                            <Label.Style>
-                                                <OnPlatform x:TypeArguments="Style"
-                                                    iOS="{StaticResource MemberInChannelStyle}"
-                                                    Android="{StaticResource MemberInChannelStyle}"
-                                                    WinPhone="{StaticResource MemberInChannelStyle}"/>
-                                            </Label.Style>
-                                        </Label>
+                                        <Label Text="{Binding Timestamp, Converter={StaticResource TimestampConverter}}"  FontSize="Micro" TextColor="Gray"/>
+                                        <Label Text="{Binding Sender.Username}" FontSize="Micro" TextColor="Gray"/>
                                     </StackLayout>
                                 </StackLayout>
                             </StackLayout>

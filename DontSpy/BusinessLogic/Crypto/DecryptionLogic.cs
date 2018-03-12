@@ -10,13 +10,14 @@ namespace DontSpy.BusinessLogic.Crypto
     {
         private readonly char[] _messageTextSymbols;
         private readonly Message _message;
-        private readonly Dictionary<int, int> _keyTable;
+        //private readonly Dictionary<int, int> _keyTable;
 
-        public DecryptionLogic(Message message, Dictionary<int, int> keyTable)
+        //public DecryptionLogic(Message message, Dictionary<int, int> keyTable)
+        public DecryptionLogic(Message message)
         {
             _message = message;
             _messageTextSymbols = message.Text.ToCharArray();
-            _keyTable = keyTable;
+            //_keyTable = keyTable;
         }
 
         public DecryptedMessage Decrypt()
@@ -46,11 +47,14 @@ namespace DontSpy.BusinessLogic.Crypto
         }
 
         private int RevertPermutationFor(int permutedChipher)
-        {
+        {/*
             if (_keyTable.ContainsValue(permutedChipher))
             {
                return _keyTable.FirstOrDefault(x => x.Value == permutedChipher).Key;
             }
+            return permutedChipher;*/
+            if (MathematicalMappingLogic.KeyTable.ContainsKey(permutedChipher))
+                return MathematicalMappingLogic.KeyTable[permutedChipher];
             return permutedChipher;
         }
 
