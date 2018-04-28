@@ -17,6 +17,7 @@ namespace DontSpy.Service
         public RestService()
         {
             _client = new HttpClient { MaxResponseContentBufferSize = 256000 };
+            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes("y:123")));
         }
 
         public async Task<bool> CreateOwnUser(User user)
