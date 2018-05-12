@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
+using DontSpy.Interfaces;
 using DontSpy.Model;
 using DontSpy.Presentation.Validation;
 using DontSpy.Presentation.Validation.Rules;

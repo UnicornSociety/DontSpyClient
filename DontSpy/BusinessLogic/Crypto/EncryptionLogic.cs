@@ -32,7 +32,7 @@ namespace DontSpy.BusinessLogic.Crypto
             }
 
             _message.Text = concatenatedEncryptedSymbols;
-            return _message;
+            return new SaltingLogic(_message).Salting();
         }
 
         private int CreateChipher(char symbol)

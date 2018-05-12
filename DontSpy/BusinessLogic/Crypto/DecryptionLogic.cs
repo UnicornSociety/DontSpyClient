@@ -35,6 +35,7 @@ namespace DontSpy.BusinessLogic.Crypto
                 }
             }
 
+            concatenatedDecryptedSymbols = new SaltingLogic(_message).Desalinating().Text;
             return new DecryptedMessage(_message.Id, _message.Timestamp, concatenatedDecryptedSymbols, _message.MessageHeader);
         }
 

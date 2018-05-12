@@ -10,5 +10,7 @@
         public static string RestUrlNewUser = "https://me.sfzlab.de/api/user/new";
 
         public static string LocalDatabaseName = "dontSpy";
+
+        public static int[] Prime = { 999979, 998819, 984083, 997609, 999769 };
     }
 }
