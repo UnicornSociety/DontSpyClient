@@ -8,7 +8,7 @@ This section describes how to use this client part of the DontSpy client-server 
 
 ### Installation
 
-Clone the repository, change to the directory and import the Xamarin project into Visual Studio. Make sure all Nuget dependencies are installed and select the Xamarin head of your choice (full functionality available only for UWP). You are ready to start.
+Clone the repository, change to the directory and import the Xamarin project into Visual Studio. Make sure all Nuget dependencies are installed and select the Xamarin head of your choice (full functionality available only for UWP). Configuration can be [adjusted here](https://github.com/dontspy/DontSpyClient/edit/master/README.md#L17). You are ready to start.
 
 ### API
 
