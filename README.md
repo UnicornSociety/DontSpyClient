@@ -12,7 +12,7 @@ Clone the repository, change to the directory and import the Xamarin project int
 
 ### API
 
-Documentation of the API can be [found here](https://github.com/dontspy/DontSpyServer/README.md).
+Documentation of the API can be [found here](https://github.com/dontspy/DontSpyServer/blob/master/README.md).
 
 ### Configuration
 
